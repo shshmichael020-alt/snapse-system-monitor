@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary":"#a3c9ff","on-secondary-fixed-variant":"#004883","surface-container-high":"#242a37","on-primary-fixed-variant":"#004e60","surface-container-highest":"#2f3542","surface-container-low":"#161c28","on-error":"#690005","surface-dim":"#0d131f","on-tertiary":"#490080","on-primary-container":"#00566a","tertiary-container":"#dab1ff","on-surface":"#dde2f4","on-surface-variant":"#bbc9cf","secondary-fixed":"#d3e3ff","primary-fixed":"#b6ebff","on-tertiary-container":"#730dc2","surface-tint":"#47d6ff","error":"#ffb4ab","on-secondary-container":"#002a51","secondary-fixed-dim":"#a3c9ff","on-tertiary-fixed":"#2c0051","on-tertiary-fixed-variant":"#6900b3","surface-bright":"#333946","on-error-container":"#ffdad6","primary-fixed-dim":"#47d6ff","inverse-on-surface":"#2a303d","surface-container":"#1a202c","inverse-surface":"#dde2f4","tertiary":"#edd4ff","on-secondary-fixed":"#001c39","surface":"#0d131f","on-primary":"#003543","tertiary-fixed-dim":"#ddb7ff","primary":"#a5e7ff","secondary-container":"#3b93f1","inverse-primary":"#00677f","tertiary-fixed":"#f0dbff","on-primary-fixed":"#001f28","error-container":"#93000a","on-background":"#dde2f4","outline-variant":"#3c494e","primary-container":"#00d2ff","outline":"#859399","on-secondary":"#00315c","surface-variant":"#2f3542","background":"#0d131f","surface-container-lowest":"#080e1a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","margin":"0.75rem","space-sm":"0.375rem","space-xl":"1.5rem","gutter-compact":"0.375rem","gutter":"0.75rem","space-lg":"1rem","margin-dense":"0.5rem","space-md":"0.75rem"},"fontFamily":{"headline-sm":["Inter"],"code-telemetry":["JetBrains Mono"],"body-sm":["Inter"],"body-md":["Inter"],"label-md":["Inter"],"code-metric-lg":["JetBrains Mono"],"headline-lg":["Inter"],"body-lg":["Inter"],"label-sm":["Inter"],"headline-md":["Inter"]},"fontSize":{"headline-sm":["1rem",{"lineHeight":"1.5rem","letterSpacing":"-0.01em","fontWeight":"600"}],"code-telemetry":["0.75rem",{"lineHeight":"1rem","letterSpacing":"-0.01em","fontWeight":"500"}],"body-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"body-md":["0.8125rem",{"lineHeight":"1.1875rem","fontWeight":"400"}],"label-md":["0.8125rem",{"lineHeight":"1.125rem","fontWeight":"500"}],"code-metric-lg":["1.125rem",{"lineHeight":"1.375rem","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["0.9375rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.02em","fontWeight":"500"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.015em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface select-none antialiased"><header class="fixed top-0 left-0 right-0 z-50 h-9 bg-surface-container-lowest/90 backdrop-blur-md flex items-center justify-between px-margin-dense"><div class="flex items-center gap-space-sm"><img alt="Snapse App Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XsxFOT4Q_N6bVi_X9PeJ0wO4Bq2Yw4YRa7s_E6QorzDYJhNpSulnG1ubFOj0Oc3s5X2FP8AWEQ9wK408Py5Z2BglTOgX4lu1HmJAESMRXStCVeKlihXmBSYcspmVcT5GeJqma_sLsY5dLLSpMsWpziJir38Idq95EjYm0vuF1J9_YhQNg1kd4PR9_O3bGaLkJgtFjzwWqhy8RFBwesNY6XjKmpcuAJjz4thbBdS8sQQzCA8k7-ekCQ8Vs"/><span class="font-label-md text-label-md text-on-surface tracking-tight">Snapse — Task Manager (Administrator)</span></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low px-space-md py-space-xs rounded gap-space-sm"><span class="material-symbols-outlined text-outline text-[16px]">search</span><input class="bg-transparent border-none text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none w-64" placeholder="Search processes, PIDs, services... Ctrl+K" type="text"/><kbd class="font-code-telemetry text-code-telemetry text-on-surface-variant bg-surface-container px-space-xs rounded">Ctrl+K</kbd></div><div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-space-xs rounded"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-code-telemetry text-code-telemetry text-on-surface-variant">Telemetry: 1.0s • Rust Engine Active</span></div></div><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex items-center"><button class="w-11 h-9 flex items-center justify-center hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[16px]">minimize</span></button><button class="w-11 h-9 flex items-center justify-center hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[14px]">crop_square</span></button><button class="w-11 h-9 flex items-center justify-center hover:bg-error-container hover:text-on-error-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[16px]">close</span></button></div></div></header><aside class="fixed left-0 top-9 bottom-7 w-52 bg-surface-container-lowest z-40 flex flex-col justify-between py-space-sm"><nav class="flex flex-col gap-space-xs px-space-xs" data-active-classes="bg-surface-container-high text-primary font-bold"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span><span class="font-label-md text-label-md">Overview</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-xs rounded transition-colors bg-surface-container-high text-primary font-bold" data-path="processes" href="#"><span class="material-symbols-outlined text-[18px]">list</span><span class="font-label-md text-label-md">Processes</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="performance" href="#"><span class="material-symbols-outlined text-[18px]">monitoring</span><span class="font-label-md text-label-md">Performance</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="process-tree" href="#"><span class="material-symbols-outlined text-[18px]">account_tree</span><span class="font-label-md text-label-md">Process Tree</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="startup-apps" href="#"><span class="material-symbols-outlined text-[18px]">rocket_launch</span><span class="font-label-md text-label-md">Startup Apps</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="services" href="#"><span class="material-symbols-outlined text-[18px]">settings_ethernet</span><span class="font-label-md text-label-md">Services</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="history-and-alerts" href="#"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="font-label-md text-label-md">History &amp; Alerts</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="resource-3d" href="#"><span class="material-symbols-outlined text-[18px]">view_in_ar</span><span class="font-label-md text-label-md">Resource 3D</span></a></nav><div class="flex flex-col gap-space-xs px-space-xs"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="compact-mode" href="#"><span class="material-symbols-outlined text-[18px]">picture_in_picture_alt</span><span class="font-label-md text-label-md">Compact Mode</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span class="font-label-md text-label-md">Settings</span></a></div></aside><div class="pl-52 pb-7"><main class="relative pt-9 w-full min-h-screen bg-surface px-space-md py-space-sm"><div class="flex flex-col w-full text-on-surface select-none">
+<!-- Command & Filter Header Bar -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-md rounded-xl mb-space-md shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-md text-headline-md text-on-surface tracking-tight">Processes</span>
+<span class="bg-surface-container-high text-primary px-space-sm py-0.5 rounded-full font-code-telemetry text-code-telemetry">
+            184 Active • 14 Suspended • 2 Background
+          </span>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<!-- Preset Dropdown -->
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high px-space-md py-space-xs rounded text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[16px] text-outline">tune</span>
+<span>Filter: Default</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<!-- Polling Speed -->
+<div class="flex items-center bg-surface-container rounded px-space-sm py-space-xs gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[15px]">speed</span>
+<span class="font-code-telemetry text-code-telemetry text-on-surface-variant">Update:</span>
+<select class="bg-transparent font-code-telemetry text-code-telemetry text-primary focus:outline-none cursor-pointer pr-1">
+<option class="bg-surface-container-high text-on-surface" selected="">1s (Normal)</option>
+<option class="bg-surface-container-high text-on-surface">0.5s (High)</option>
+<option class="bg-surface-container-high text-on-surface">Paused</option>
+</select>
+</div>
+<!-- Create Dump -->
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high px-space-md py-space-xs rounded text-on-surface font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>Create Dump</span>
+</button>
+<!-- End Task Danger Button -->
+<button class="flex items-center gap-space-xs bg-error-container hover:bg-error/30 text-error px-space-md py-space-xs rounded font-label-md text-label-md transition-colors shadow-sm" id="triggerKillModal">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>End Task</span>
+<kbd class="font-code-telemetry text-code-telemetry bg-surface-container-lowest/60 text-error px-1 rounded ml-1">Del</kbd>
+</button>
+</div>
+</div>
+<!-- Filter & Category Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs overflow-x-auto">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-space-md py-space-xs rounded font-semibold transition-colors">All (200)</button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-space-md py-space-xs rounded transition-colors">Apps (8)</button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-space-md py-space-xs rounded transition-colors">Background (64)</button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-space-md py-space-xs rounded transition-colors">Windows (112)</button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-space-md py-space-xs rounded flex items-center gap-space-xs transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+          High Resource
+        </button>
+</div>
+<div class="flex items-center bg-surface-container px-space-md py-space-xs rounded flex-1 max-w-md gap-space-sm">
+<span class="material-symbols-outlined text-outline text-[16px]">filter_alt</span>
+<input class="bg-transparent border-none text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none w-full" placeholder="Filter by process name, PID, user or command..." type="text"/>
+<span class="font-code-telemetry text-code-telemetry text-on-surface-variant/60">ESC to reset</span>
+</div>
+</div>
+</div>
+<!-- Main Workhorse Split Area -->
+<div class="flex gap-space-md items-start w-full relative">
+<!-- High-Density Process Data Grid -->
+<div class="flex-1 bg-surface-container-low rounded-xl overflow-hidden shadow-sm flex flex-col">
+<!-- Grid Column Header -->
+<div class="grid grid-cols-12 bg-surface-container px-space-md py-space-xs text-on-surface-variant font-code-telemetry text-code-telemetry uppercase tracking-wider sticky top-0 z-10 items-center select-none">
+<div class="col-span-4 flex items-center gap-space-xs cursor-pointer hover:text-on-surface">
+<span>Name</span>
+<span class="material-symbols-outlined text-[13px] text-primary">arrow_upward</span>
+</div>
+<div class="col-span-1 flex items-center justify-end pr-space-sm cursor-pointer hover:text-on-surface">
+<span>PID</span>
+</div>
+<div class="col-span-1 flex items-center cursor-pointer hover:text-on-surface">
+<span>Status</span>
+</div>
+<div class="col-span-1 flex items-center justify-end pr-space-sm cursor-pointer text-primary">
+<span>CPU %</span>
+<span class="material-symbols-outlined text-[13px] text-primary">arrow_downward</span>
+</div>
+<div class="col-span-2 flex items-center justify-end pr-space-sm cursor-pointer hover:text-on-surface">
+<span>Memory</span>
+</div>
+<div class="col-span-1 flex items-center justify-end pr-space-sm cursor-pointer hover:text-on-surface">
+<span>Disk</span>
+</div>
+<div class="col-span-1 flex items-center justify-end pr-space-sm cursor-pointer hover:text-on-surface">
+<span>Network</span>
+</div>
+<div class="col-span-1 flex items-center justify-end cursor-pointer hover:text-on-surface">
+<span>User</span>
+</div>
+</div>
+<!-- Table Body / Rows -->
+<div class="flex flex-col font-body-sm text-body-sm divide-y-0">
+<!-- ROW 1 (ACTIVE / SELECTED: Visual Studio Code) -->
+<div class="grid grid-cols-12 items-center px-space-md py-1.5 bg-surface-container-high/90 relative cursor-pointer hover:bg-surface-container-highest transition-colors group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="col-span-4 flex items-center gap-space-xs truncate pr-space-sm">
+<span class="material-symbols-outlined text-[14px] text-primary transition-transform duration-100 transform rotate-90">arrow_right</span>
+<div class="w-5 h-5 rounded bg-surface-container-highest flex items-center justify-center text-primary-container font-code-telemetry text-[11px] font-bold">
+              VS
+            </div>
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Visual Studio Code</span>
+<span class="font-code-telemetry text-code-telemetry text-primary">(12)</span>
+</div>
+<div class="col-span-1 font-code-telemetry text-code-telemetry text-on-surface-variant text-right pr-space-sm">
+            14208
+          </div>
+<div class="col-span-1">
+<span class="px-space-xs py-0.5 rounded text-[10px] font-code-telemetry bg-secondary-container/20 text-primary-container font-medium">Running</span>
+</div>
+<!-- CPU cell with micro heat bar -->
+<div class="col-span-1 text-right pr-space-sm relative">
+<div class="absolute inset-y-1 right-1 w-16 bg-surface-container-highest rounded overflow-hidden -z-0">
+<div class="bg-primary-container/30 h-full w-[65%]"></div>
+</div>
+<span class="relative z-10 font-code-metric-lg text-code-telemetry text-primary font-bold">18.4%</span>
+</div>
+<div class="col-span-2 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface font-semibold">
+            2,140 MB
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">
+            14.2 MB/s
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">
+            8.4 Mbps
+          </div>
+<div class="col-span-1 text-right font-code-telemetry text-[11px] text-outline truncate" title="DESKTOP-R9\Alex">
+            Alex
+          </div>
+</div>
+<!-- ROW 1.1 (Subprocess: Code Helper Worker) -->
+<div class="grid grid-cols-12 items-center px-space-md py-1 bg-surface-container-lowest/50 text-on-surface-variant text-body-sm pl-10 cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="col-span-4 flex items-center gap-space-xs truncate">
+<span class="material-symbols-outlined text-[13px] text-outline">subdirectory_arrow_right</span>
+<span class="font-code-telemetry text-code-telemetry text-on-surface truncate">code.exe (Extension Host)</span>
+</div>
+<div class="col-span-1 font-code-telemetry text-code-telemetry text-outline text-right pr-space-sm">18932</div>
+<div class="col-span-1">
+<span class="px-space-xs py-0.5 rounded text-[10px] font-code-telemetry bg-surface-container text-on-surface-variant">Active</span>
+</div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">7.8%</div>
+<div class="col-span-2 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">612 MB</div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">0.2 MB/s</div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">0 Kbps</div>
+<div class="col-span-1 text-right font-code-telemetry text-[11px] text-outline truncate">Alex</div>
+</div>
+<!-- ROW 2: Google Chrome -->
+<div class="grid grid-cols-12 items-center px-space-md py-1.5 bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="col-span-4 flex items-center gap-space-xs truncate pr-space-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<div class="w-5 h-5 rounded bg-surface-container-high flex items-center justify-center text-secondary font-code-telemetry text-[11px] font-bold">
+              GC
+            </div>
+<span class="font-label-md text-label-md text-on-surface truncate">Google Chrome</span>
+<span class="font-code-telemetry text-code-telemetry text-outline">(24)</span>
+</div>
+<div class="col-span-1 font-code-telemetry text-code-telemetry text-on-surface-variant text-right pr-space-sm">
+            9214
+          </div>
+<div class="col-span-1">
+<span class="px-space-xs py-0.5 rounded text-[10px] font-code-telemetry bg-secondary-container/20 text-secondary font-medium">Running</span>
+</div>
+<!-- CPU micro bar -->
+<div class="col-span-1 text-right pr-space-sm relative">
+<div class="absolute inset-y-1 right-1 w-16 bg-surface-container-highest rounded overflow-hidden -z-0">
+<div class="bg-secondary/30 h-full w-[45%]"></div>
+</div>
+<span class="relative z-10 font-code-metric-lg text-code-telemetry text-secondary font-semibold">12.1%</span>
+</div>
+<div class="col-span-2 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface font-semibold">
+            1,480 MB
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">
+            2.1 MB/s
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">
+            120 Kbps
+          </div>
+<div class="col-span-1 text-right font-code-telemetry text-[11px] text-outline truncate">
+            Alex
+          </div>
+</div>
+<!-- ROW 3: rust-analyzer -->
+<div class="grid grid-cols-12 items-center px-space-md py-1.5 bg-surface-container-lowest/30 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="col-span-4 flex items-center gap-space-xs truncate pr-space-sm pl-4">
+<div class="w-5 h-5 rounded bg-surface-container-high flex items-center justify-center text-tertiary font-code-telemetry text-[11px] font-bold">
+              RA
+            </div>
+<span class="font-label-md text-label-md text-on-surface truncate">rust-analyzer.exe</span>
+</div>
+<div class="col-span-1 font-code-telemetry text-code-telemetry text-on-surface-variant text-right pr-space-sm">
+            28140
+          </div>
+<div class="col-span-1">
+<span class="px-space-xs py-0.5 rounded text-[10px] font-code-telemetry bg-surface-container-high text-on-surface font-medium">Efficiency</span>
+</div>
+<div class="col-span-1 text-right pr-space-sm font-code-metric-lg text-code-telemetry text-on-surface">
+            4.2%
+          </div>
+<div class="col-span-2 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface">
+            820 MB
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">
+            0.0 MB/s
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">
+            0 Kbps
+          </div>
+<div class="col-span-1 text-right font-code-telemetry text-[11px] text-outline truncate">
+            Alex
+          </div>
+</div>
+<!-- ROW 4: docker.exe -->
+<div class="grid grid-cols-12 items-center px-space-md py-1.5 bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="col-span-4 flex items-center gap-space-xs truncate pr-space-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">arrow_right</span>
+<div class="w-5 h-5 rounded bg-surface-container-high flex items-center justify-center text-primary-container font-code-telemetry text-[11px] font-bold">
+              DK
+            </div>
+<span class="font-label-md text-label-md text-on-surface truncate">Docker Desktop Backend</span>
+<span class="font-code-telemetry text-code-telemetry text-outline">(6)</span>
+</div>
+<div class="col-span-1 font-code-telemetry text-code-telemetry text-on-surface-variant text-right pr-space-sm">
+            7720
+          </div>
+<div class="col-span-1">
+<span class="px-space-xs py-0.5 rounded text-[10px] font-code-telemetry bg-secondary-container/20 text-secondary font-medium">Running</span>
+</div>
+<div class="col-span-1 text-right pr-space-sm font-code-metric-lg text-code-telemetry text-on-surface">
+            1.8%
+          </div>
+<div class="col-span-2 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface">
+            1,940 MB
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">
+            0.4 MB/s
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">
+            44 Kbps
+          </div>
+<div class="col-span-1 text-right font-code-telemetry text-[11px] text-outline truncate">
+            SYSTEM
+          </div>
+</div>
+<!-- ROW 5: Windows Explorer -->
+<div class="grid grid-cols-12 items-center px-space-md py-1.5 bg-surface-container-lowest/30 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="col-span-4 flex items-center gap-space-xs truncate pr-space-sm pl-4">
+<div class="w-5 h-5 rounded bg-surface-container-high flex items-center justify-center text-primary font-code-telemetry text-[11px] font-bold">
+              EX
+            </div>
+<span class="font-label-md text-label-md text-on-surface truncate">Windows Explorer</span>
+</div>
+<div class="col-span-1 font-code-telemetry text-code-telemetry text-on-surface-variant text-right pr-space-sm">
+            8144
+          </div>
+<div class="col-span-1">
+<span class="px-space-xs py-0.5 rounded text-[10px] font-code-telemetry bg-secondary-container/20 text-secondary font-medium">Running</span>
+</div>
+<div class="col-span-1 text-right pr-space-sm font-code-metric-lg text-code-telemetry text-on-surface">
+            0.6%
+          </div>
+<div class="col-span-2 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface">
+            198 MB
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">
+            0.0 MB/s
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">
+            0 Kbps
+          </div>
+<div class="col-span-1 text-right font-code-telemetry text-[11px] text-outline truncate">
+            Alex
+          </div>
+</div>
+<!-- ROW 6: SearchHost.exe (Suspended) -->
+<div class="grid grid-cols-12 items-center px-space-md py-1.5 bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer group opacity-75">
+<div class="col-span-4 flex items-center gap-space-xs truncate pr-space-sm pl-4">
+<div class="w-5 h-5 rounded bg-surface-container-high flex items-center justify-center text-outline font-code-telemetry text-[11px] font-bold">
+              SH
+            </div>
+<span class="font-label-md text-label-md text-on-surface-variant truncate">SearchHost.exe</span>
+</div>
+<div class="col-span-1 font-code-telemetry text-code-telemetry text-outline text-right pr-space-sm">
+            11048
+          </div>
+<div class="col-span-1">
+<span class="px-space-xs py-0.5 rounded text-[10px] font-code-telemetry bg-surface-container text-outline font-medium">Suspended</span>
+</div>
+<div class="col-span-1 text-right pr-space-sm font-code-metric-lg text-code-telemetry text-outline">
+            0.0%
+          </div>
+<div class="col-span-2 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface-variant">
+            74 MB
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">
+            0.0 MB/s
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">
+            0 Kbps
+          </div>
+<div class="col-span-1 text-right font-code-telemetry text-[11px] text-outline truncate">
+            Alex
+          </div>
+</div>
+<!-- ROW 7: dwm.exe Desktop Window Manager -->
+<div class="grid grid-cols-12 items-center px-space-md py-1.5 bg-surface-container-lowest/30 hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="col-span-4 flex items-center gap-space-xs truncate pr-space-sm pl-4">
+<div class="w-5 h-5 rounded bg-surface-container-high flex items-center justify-center text-secondary font-code-telemetry text-[11px] font-bold">
+              DW
+            </div>
+<span class="font-label-md text-label-md text-on-surface truncate">dwm.exe Desktop Window Manager</span>
+</div>
+<div class="col-span-1 font-code-telemetry text-code-telemetry text-on-surface-variant text-right pr-space-sm">
+            1824
+          </div>
+<div class="col-span-1">
+<span class="px-space-xs py-0.5 rounded text-[10px] font-code-telemetry bg-secondary-container/20 text-secondary font-medium">Running</span>
+</div>
+<div class="col-span-1 text-right pr-space-sm font-code-metric-lg text-code-telemetry text-on-surface">
+            2.1%
+          </div>
+<div class="col-span-2 text-right pr-space-sm font-code-telemetry text-code-telemetry text-on-surface">
+            340 MB
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">
+            0.0 MB/s
+          </div>
+<div class="col-span-1 text-right pr-space-sm font-code-telemetry text-code-telemetry text-outline">
+            0 Kbps
+          </div>
+<div class="col-span-1 text-right font-code-telemetry text-[11px] text-outline truncate">
+            SYSTEM
+          </div>
+</div>
+</div>
+<!-- Quick summary row inside the grid -->
+<div class="bg-surface-container-high px-space-md py-space-xs mt-auto flex items-center justify-between text-on-surface-variant font-code-telemetry text-code-telemetry">
+<div class="flex items-center gap-space-md">
+<span>Active filter: <strong class="text-on-surface">All</strong></span>
+<span>Selected: <strong class="text-primary">1 PID (14208)</strong></span>
+</div>
+<div class="flex items-center gap-space-md">
+<span>Aggregated CPU: <strong class="text-on-surface">39.1%</strong></span>
+<span>Total Working Set: <strong class="text-on-surface">7,814 MB</strong></span>
+</div>
+</div>
+</div>
+<!-- Right-Hand Inspector Drawer (340px Width) -->
+<div class="w-80 flex-shrink-0 bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-md shadow-md transition-all" id="inspectorDrawer">
+<!-- Drawer Header with App Glyph and Quick Dismiss -->
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container font-headline-md font-bold shadow-sm">
+            VS
+          </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight">Visual Studio Code</span>
+<span class="font-code-telemetry text-code-telemetry text-outline">code.exe</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">dock_to_right</span>
+</button>
+</div>
+<!-- Process IDs & Hierarchy -->
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container p-space-sm rounded">
+<div>
+<span class="font-code-telemetry text-[11px] text-outline block">Process ID</span>
+<span class="font-code-metric-lg text-code-telemetry text-primary font-bold">14208</span>
+</div>
+<div>
+<span class="font-code-telemetry text-[11px] text-outline block">Parent Process</span>
+<span class="font-code-telemetry text-code-telemetry text-on-surface truncate block" title="explorer.exe (PID 8144)">explorer.exe (8144)</span>
+</div>
+</div>
+<!-- File Path with Copy Action -->
+<div class="flex flex-col gap-1 bg-surface-container-lowest p-space-sm rounded">
+<div class="flex items-center justify-between">
+<span class="font-code-telemetry text-[10px] text-outline uppercase tracking-wider">Executable Binary Path</span>
+<button class="text-primary hover:text-primary-container flex items-center gap-0.5 font-code-telemetry text-[10px]" title="Copy to clipboard">
+<span class="material-symbols-outlined text-[12px]">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+<p class="font-code-telemetry text-[11px] text-on-surface-variant break-all select-text leading-tight">
+          C:\Users\Alex\AppData\Local\Programs\Microsoft VS Code\Code.exe
+        </p>
+</div>
+<!-- Mini Telemetry Sparklines (CPU 60s & Memory) -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Telemetry: Last 60 Seconds</span>
+<!-- CPU Chart -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col gap-1">
+<div class="flex justify-between items-center text-code-telemetry font-code-telemetry">
+<span class="text-on-surface-variant">CPU Consumption</span>
+<span class="text-primary font-bold">18.4%</span>
+</div>
+<div class="h-14 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 40">
+<defs>
+<lineargradient id="cpuGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#00d2ff" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#00d2ff" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<line stroke="#242a37" stroke-dasharray="2,2" stroke-width="0.8" x1="0" x2="100" y1="10" y2="10"></line>
+<line stroke="#242a37" stroke-dasharray="2,2" stroke-width="0.8" x1="0" x2="100" y1="20" y2="20"></line>
+<line stroke="#242a37" stroke-dasharray="2,2" stroke-width="0.8" x1="0" x2="100" y1="30" y2="30"></line>
+<!-- Area fill -->
+<polygon fill="url(#cpuGradient)" points="0,38 0,32 10,28 20,30 30,15 40,22 50,18 60,12 70,20 80,14 90,16 100,8 100,38"></polygon>
+<!-- Top stroke -->
+<polyline fill="none" points="0,32 10,28 20,30 30,15 40,22 50,18 60,12 70,20 80,14 90,16 100,8" stroke="#00d2ff" stroke-width="1.8"></polyline>
+</svg>
+</div>
+</div>
+<!-- RAM Footprint Chart -->
+<div class="bg-surface-container p-space-sm rounded flex flex-col gap-1">
+<div class="flex justify-between items-center text-code-telemetry font-code-telemetry">
+<span class="text-on-surface-variant">Private Memory</span>
+<span class="text-tertiary-container font-bold">2,140 MB</span>
+</div>
+<div class="h-10 w-full relative">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 30">
+<defs>
+<lineargradient id="ramGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#dab1ff" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#dab1ff" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<polygon fill="url(#ramGradient)" points="0,28 0,18 20,17 40,16 60,14 80,12 100,10 100,28"></polygon>
+<polyline fill="none" points="0,18 20,17 40,16 60,14 80,12 100,10" stroke="#dab1ff" stroke-width="1.5"></polyline>
+</svg>
+</div>
+</div>
+</div>
+<!-- Metrics Matrix 4-Cell Grid -->
+<div class="grid grid-cols-2 gap-space-xs font-code-telemetry text-code-telemetry">
+<div class="bg-surface-container-high/60 p-space-sm rounded flex flex-col">
+<span class="text-outline text-[10px]">Threads</span>
+<span class="text-on-surface font-semibold text-body-md">42 active</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-sm rounded flex flex-col">
+<span class="text-outline text-[10px]">Handles</span>
+<span class="text-on-surface font-semibold text-body-md">1,418 open</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-sm rounded flex flex-col">
+<span class="text-outline text-[10px]">Architecture</span>
+<span class="text-on-surface font-semibold text-body-md">x64 (Native)</span>
+</div>
+<div class="bg-surface-container-high/60 p-space-sm rounded flex flex-col">
+<span class="text-outline text-[10px]">Base Priority</span>
+<span class="text-on-surface font-semibold text-body-md">8 (Normal)</span>
+</div>
+</div>
+<!-- Quick Action Utilities -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="flex items-center justify-center gap-space-xs bg-surface-container hover:bg-surface-container-high py-space-xs px-space-sm rounded font-label-md text-label-md text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[15px]">folder_open</span>
+<span>Open Location</span>
+</button>
+<button class="flex items-center justify-center gap-space-xs bg-surface-container hover:bg-surface-container-high py-space-xs px-space-sm rounded font-label-md text-label-md text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[15px]">settings_ethernet</span>
+<span>Set Affinity</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-space-xs mt-space-xs">
+<button class="flex items-center justify-center gap-space-xs bg-surface-container-high hover:bg-surface-container-highest text-error py-space-xs px-space-sm rounded font-label-md text-label-md transition-colors" id="quickEndBtn">
+<span class="material-symbols-outlined text-[16px]">close</span>
+<span>End Process</span>
+</button>
+<button class="flex items-center justify-center gap-space-xs bg-error hover:bg-error-container text-on-error hover:text-on-error-container py-space-xs px-space-sm rounded font-label-md text-label-md font-semibold transition-colors" id="forceKillBtn">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>Force Kill</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Danger Confirmation Modal (Hidden / Toggleable) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-surface-dim/80 backdrop-blur-sm" id="terminationModal">
+<div class="bg-surface-container-low max-w-lg w-full rounded-xl overflow-hidden shadow-2xl relative p-space-lg flex flex-col gap-space-md">
+<!-- Top red warning bar accent -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-error"></div>
+<div class="flex items-start gap-space-md pt-space-xs">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-error text-[24px]">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Terminate Visual Studio Code (PID: 14208)?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Terminating this process tree will immediately close <strong class="text-on-surface">code.exe</strong> and its 12 sub-workers (including extension hosts and terminal shells). Any unsaved file buffers will be lost immediately.
+          </p>
+</div>
+</div>
+<!-- Execution mode callout -->
+<div class="bg-surface-container p-space-md rounded flex flex-col gap-space-xs font-code-telemetry text-code-telemetry">
+<div class="flex items-center justify-between text-on-surface">
+<span class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
+<span>Graceful Signal (SIGTERM)</span>
+</span>
+<span class="text-outline">Wait 5000ms</span>
+</div>
+<div class="flex items-center justify-between text-error font-medium">
+<span class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[15px] text-error">dangerous</span>
+<span>Hard Termination (TerminateProcess)</span>
+</span>
+<span>Instant</span>
+</div>
+</div>
+<!-- Modal Actions -->
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface px-space-lg py-space-xs rounded font-label-md text-label-md transition-colors" id="cancelModalBtn">
+          Cancel (Esc)
+        </button>
+<button class="bg-surface-container-highest hover:bg-surface-bright text-on-surface px-space-lg py-space-xs rounded font-label-md text-label-md transition-colors" id="confirmGracefulBtn">
+          Graceful Exit
+        </button>
+<button class="bg-error hover:bg-error-container text-on-error hover:text-on-error-container px-space-lg py-space-xs rounded font-label-md text-label-md font-semibold transition-colors" id="confirmForceBtn">
+          Force Terminate (Enter)
+        </button>
+</div>
+</div>
+</div>
+<!-- Interactive State Logic -->
+<script>
+    (function () {
+      const modal = document.getElementById('terminationModal');
+      const triggerBtn = document.getElementById('triggerKillModal');
+      const forceKillBtn = document.getElementById('forceKillBtn');
+      const quickEndBtn = document.getElementById('quickEndBtn');
+      const cancelBtn = document.getElementById('cancelModalBtn');
+      const confirmForce = document.getElementById('confirmForceBtn');
+      const confirmGraceful = document.getElementById('confirmGracefulBtn');
+
+      function openModal() {
+        modal.classList.remove('hidden');
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+      }
+
+      if (triggerBtn) triggerBtn.addEventListener('click', openModal);
+      if (forceKillBtn) forceKillBtn.addEventListener('click', openModal);
+      if (quickEndBtn) quickEndBtn.addEventListener('click', openModal);
+      if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+      if (confirmForce) confirmForce.addEventListener('click', closeModal);
+      if (confirmGraceful) confirmGraceful.addEventListener('click', closeModal);
+
+      window.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('hidden')) {
+          if (e.key === 'Escape') closeModal();
+          if (e.key === 'Enter') closeModal();
+        } else {
+          if (e.key === 'Delete') openModal();
+        }
+      });
+    })();
+  </script>
+</div></main></div><footer class="fixed bottom-0 left-0 right-0 z-50 h-7 bg-surface-container-lowest flex items-center justify-between px-space-md font-code-telemetry text-code-telemetry text-on-surface-variant"><div class="flex items-center gap-space-md"><span>Processes: <strong class="text-on-surface font-semibold">184</strong></span><span>Threads: <strong class="text-on-surface font-semibold">2,419</strong></span><span>Handles: <strong class="text-on-surface font-semibold">94,821</strong></span><span>Up Time: <strong class="text-on-surface font-semibold">04:18:22</strong></span><span>Kernel Memory: <strong class="text-on-surface font-semibold">682 MB</strong></span><span>Pagefile: <strong class="text-on-surface font-semibold">18.2 / 36.0 GB</strong></span></div><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span><span>Status: <strong class="text-on-surface font-semibold">Normal</strong></span></div></footer></body></html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary":"#a3c9ff","on-secondary-fixed-variant":"#004883","surface-container-high":"#242a37","on-primary-fixed-variant":"#004e60","surface-container-highest":"#2f3542","surface-container-low":"#161c28","on-error":"#690005","surface-dim":"#0d131f","on-tertiary":"#490080","on-primary-container":"#00566a","tertiary-container":"#dab1ff","on-surface":"#dde2f4","on-surface-variant":"#bbc9cf","secondary-fixed":"#d3e3ff","primary-fixed":"#b6ebff","on-tertiary-container":"#730dc2","surface-tint":"#47d6ff","error":"#ffb4ab","on-secondary-container":"#002a51","secondary-fixed-dim":"#a3c9ff","on-tertiary-fixed":"#2c0051","on-tertiary-fixed-variant":"#6900b3","surface-bright":"#333946","on-error-container":"#ffdad6","primary-fixed-dim":"#47d6ff","inverse-on-surface":"#2a303d","surface-container":"#1a202c","inverse-surface":"#dde2f4","tertiary":"#edd4ff","on-secondary-fixed":"#001c39","surface":"#0d131f","on-primary":"#003543","tertiary-fixed-dim":"#ddb7ff","primary":"#a5e7ff","secondary-container":"#3b93f1","inverse-primary":"#00677f","tertiary-fixed":"#f0dbff","on-primary-fixed":"#001f28","error-container":"#93000a","on-background":"#dde2f4","outline-variant":"#3c494e","primary-container":"#00d2ff","outline":"#859399","on-secondary":"#00315c","surface-variant":"#2f3542","background":"#0d131f","surface-container-lowest":"#080e1a"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","margin":"0.75rem","space-sm":"0.375rem","space-xl":"1.5rem","gutter-compact":"0.375rem","gutter":"0.75rem","space-lg":"1rem","margin-dense":"0.5rem","space-md":"0.75rem"},"fontFamily":{"headline-sm":["Inter"],"code-telemetry":["JetBrains Mono"],"body-sm":["Inter"],"body-md":["Inter"],"label-md":["Inter"],"code-metric-lg":["JetBrains Mono"],"headline-lg":["Inter"],"body-lg":["Inter"],"label-sm":["Inter"],"headline-md":["Inter"]},"fontSize":{"headline-sm":["1rem",{"lineHeight":"1.5rem","letterSpacing":"-0.01em","fontWeight":"600"}],"code-telemetry":["0.75rem",{"lineHeight":"1rem","letterSpacing":"-0.01em","fontWeight":"500"}],"body-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"400"}],"body-md":["0.8125rem",{"lineHeight":"1.1875rem","fontWeight":"400"}],"label-md":["0.8125rem",{"lineHeight":"1.125rem","fontWeight":"500"}],"code-metric-lg":["1.125rem",{"lineHeight":"1.375rem","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["0.9375rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.02em","fontWeight":"500"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.015em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface select-none antialiased"><header class="fixed top-0 left-0 right-0 z-50 h-9 bg-surface-container-lowest/90 backdrop-blur-md flex items-center justify-between px-margin-dense"><div class="flex items-center gap-space-sm"><img alt="Snapse App Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XsxFOT4Q_N6bVi_X9PeJ0wO4Bq2Yw4YRa7s_E6QorzDYJhNpSulnG1ubFOj0Oc3s5X2FP8AWEQ9wK408Py5Z2BglTOgX4lu1HmJAESMRXStCVeKlihXmBSYcspmVcT5GeJqma_sLsY5dLLSpMsWpziJir38Idq95EjYm0vuF1J9_YhQNg1kd4PR9_O3bGaLkJgtFjzwWqhy8RFBwesNY6XjKmpcuAJjz4thbBdS8sQQzCA8k7-ekCQ8Vs"/><span class="font-label-md text-label-md text-on-surface tracking-tight">Snapse — Task Manager (Administrator)</span></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low px-space-md py-space-xs rounded gap-space-sm"><span class="material-symbols-outlined text-outline text-[16px]">search</span><input class="bg-transparent border-none text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none w-64" placeholder="Search processes, PIDs, services... Ctrl+K" type="text"/><kbd class="font-code-telemetry text-code-telemetry text-on-surface-variant bg-surface-container px-space-xs rounded">Ctrl+K</kbd></div><div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-space-xs rounded"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-code-telemetry text-code-telemetry text-on-surface-variant">Telemetry: 1.0s • Rust Engine Active</span></div></div><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex items-center"><button class="w-11 h-9 flex items-center justify-center hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[16px]">minimize</span></button><button class="w-11 h-9 flex items-center justify-center hover:bg-surface-container-high hover:text-on-surface text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[14px]">crop_square</span></button><button class="w-11 h-9 flex items-center justify-center hover:bg-error-container hover:text-on-error-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[16px]">close</span></button></div></div></header><aside class="fixed left-0 top-9 bottom-7 w-52 bg-surface-container-lowest z-40 flex flex-col justify-between py-space-sm"><nav class="flex flex-col gap-space-xs px-space-xs" data-active-classes="bg-surface-container-high text-primary font-bold"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span><span class="font-label-md text-label-md">Overview</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="processes" href="#"><span class="material-symbols-outlined text-[18px]">list</span><span class="font-label-md text-label-md">Processes</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="performance" href="#"><span class="material-symbols-outlined text-[18px]">monitoring</span><span class="font-label-md text-label-md">Performance</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-xs rounded transition-colors bg-surface-container-high text-primary font-bold" data-path="process-tree" href="#"><span class="material-symbols-outlined text-[18px]">account_tree</span><span class="font-label-md text-label-md">Process Tree</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="startup-apps" href="#"><span class="material-symbols-outlined text-[18px]">rocket_launch</span><span class="font-label-md text-label-md">Startup Apps</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="services" href="#"><span class="material-symbols-outlined text-[18px]">settings_ethernet</span><span class="font-label-md text-label-md">Services</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="history-and-alerts" href="#"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="font-label-md text-label-md">History &amp; Alerts</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="resource-3d" href="#"><span class="material-symbols-outlined text-[18px]">view_in_ar</span><span class="font-label-md text-label-md">Resource 3D</span></a></nav><div class="flex flex-col gap-space-xs px-space-xs"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="compact-mode" href="#"><span class="material-symbols-outlined text-[18px]">picture_in_picture_alt</span><span class="font-label-md text-label-md">Compact Mode</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span class="font-label-md text-label-md">Settings</span></a></div></aside><div class="pl-52 pb-7"><main class="relative pt-9 w-full min-h-screen bg-surface px-space-md py-space-sm"><div class="flex flex-col w-full">
+<!-- Command Toolbar & Tactical Filter Matrix -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-sm rounded-lg shadow-sm">
+<div class="flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[20px]">account_tree</span>
+<h1 class="font-headline-sm text-headline-sm text-on-surface">Process Tree &amp; Hierarchy Inspector</h1>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-code-telemetry text-label-sm text-secondary">NT_SYS_V2.6</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="relative flex items-center bg-surface-container-high rounded px-space-sm py-1">
+<span class="material-symbols-outlined text-outline text-[16px] mr-space-xs">filter_alt</span>
+<input class="bg-transparent text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none w-56" id="tree-search" placeholder="Filter node, PID, or symbol (e.g. rust-analyzer)..." type="text"/>
+<kbd class="font-code-telemetry text-[10px] text-on-surface-variant bg-surface-container-lowest px-1 py-0.2 rounded">Alt+F</kbd>
+</div>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-highest px-space-sm py-1 rounded text-on-surface font-label-sm text-label-sm transition-colors" id="btn-expand-all">
+<span class="material-symbols-outlined text-[14px]">unfold_more</span>
+<span>Expand All</span>
+</button>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-highest px-space-sm py-1 rounded text-on-surface font-label-sm text-label-sm transition-colors" id="btn-collapse-all">
+<span class="material-symbols-outlined text-[14px]">unfold_less</span>
+<span>Collapse All</span>
+</button>
+<div class="w-px h-5 bg-surface-container-highest mx-space-xs"></div>
+<button class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 rounded text-primary font-label-sm text-label-sm shadow-sm" id="toggle-group">
+<span class="material-symbols-outlined text-[14px]">category</span>
+<span>Group by App</span>
+</button>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-highest px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" id="toggle-orphaned">
+<span class="material-symbols-outlined text-[14px] text-error">warning</span>
+<span>Orphaned (2)</span>
+</button>
+</div>
+</div>
+<!-- Telemetry Ticker Mini-Bar -->
+<div class="flex items-center justify-between pt-space-xs text-on-surface-variant font-code-telemetry text-[11px]">
+<div class="flex items-center gap-space-md">
+<span>Active Subtrees: <strong class="text-on-surface">42</strong></span>
+<span>Peak Execution Node: <strong class="text-primary font-semibold">rust-analyzer.exe (PID 22910)</strong></span>
+<span>Tree Memory Footprint: <strong class="text-on-surface">4.18 GB</strong></span>
+</div>
+<div class="flex items-center gap-space-xs text-outline">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span>Realtime Hook • win32k/ntdll.dll active</span>
+</div>
+</div>
+</div>
+<!-- Primary Workspace: Split Grid (Left Tree, Right Inspector Drawer) -->
+<div class="grid grid-cols-12 gap-space-sm mt-space-sm">
+<!-- Left Pane: High-Density Monospace Tree View -->
+<div class="col-span-12 xl:col-span-8 flex flex-col bg-surface-container-lowest rounded-lg shadow-md overflow-hidden">
+<!-- Grid Header -->
+<div class="grid grid-cols-12 gap-space-xs bg-surface-container-high px-space-sm py-1.5 font-code-telemetry text-[11px] text-on-surface-variant uppercase tracking-wider items-center select-none">
+<div class="col-span-5 flex items-center gap-space-xs">
+<span>Hierarchy Tree Structure</span>
+<span class="material-symbols-outlined text-[12px]">sort</span>
+</div>
+<div class="col-span-2 text-right">PID / PPID</div>
+<div class="col-span-1 text-right">CPU %</div>
+<div class="col-span-2 text-right">Commit (MB)</div>
+<div class="col-span-2 text-right">Handles / Flags</div>
+</div>
+<!-- Tree Nodes Container -->
+<div class="flex flex-col text-on-surface font-code-telemetry text-code-telemetry divide-y-0" id="process-tree-list">
+<!-- Root Node 1: explorer.exe -->
+<div class="tree-row group flex flex-col bg-surface-container-low hover:bg-surface-container transition-colors" data-node="explorer">
+<div class="grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center cursor-pointer">
+<div class="col-span-5 flex items-center min-w-0">
+<button class="node-toggle w-4 h-4 flex items-center justify-center text-primary hover:text-primary-fixed-dim mr-1" data-target="children-explorer">
+<span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<span class="material-symbols-outlined text-secondary text-[16px] mr-1.5">desktop_windows</span>
+<span class="font-semibold text-on-surface truncate">explorer.exe</span>
+<span class="ml-1.5 text-on-surface-variant text-[10px] hidden sm:inline">(User Shell)</span>
+</div>
+<div class="col-span-2 text-right text-outline">8144 <span class="text-on-surface-variant/40">/ 1204</span></div>
+<div class="col-span-1 text-right text-primary">0.8%</div>
+<div class="col-span-2 text-right text-on-surface">182.4 MB</div>
+<div class="col-span-2 text-right flex items-center justify-end gap-1">
+<span class="text-on-surface-variant">2,410</span>
+<span class="px-1 py-0.2 rounded bg-surface-container-highest text-[9px] text-secondary">SHELL</span>
+</div>
+</div>
+<!-- Explorer's Descendant Branch Container -->
+<div class="flex flex-col pl-4 relative" id="children-explorer">
+<!-- Nested vertical guide line -->
+<div class="absolute left-2.5 top-0 bottom-2 w-px bg-surface-container-highest pointer-events-none"></div>
+<!-- Branch Child 1: code.exe (Parent) -->
+<div class="tree-row group relative flex flex-col hover:bg-surface-container transition-colors" data-node="code-parent">
+<div class="grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center cursor-pointer">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<button class="node-toggle w-4 h-4 flex items-center justify-center text-primary mr-1" data-target="children-code">
+<span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<span class="material-symbols-outlined text-primary-container text-[16px] mr-1.5">terminal</span>
+<span class="font-medium text-on-surface truncate">code.exe</span>
+<span class="ml-1 text-on-surface-variant text-[10px]">VSCode Root</span>
+</div>
+<div class="col-span-2 text-right text-outline">14208 <span class="text-on-surface-variant/40">/ 8144</span></div>
+<div class="col-span-1 text-right text-secondary-fixed">14.2%</div>
+<div class="col-span-2 text-right text-on-surface">840.1 MB</div>
+<div class="col-span-2 text-right flex items-center justify-end gap-1">
+<span class="text-on-surface-variant">1,894</span>
+<span class="px-1 py-0.2 rounded bg-surface-container-high text-[9px] text-primary">DEV</span>
+</div>
+</div>
+<!-- VS Code Sub-tree -->
+<div class="flex flex-col pl-6 relative" id="children-code">
+<div class="absolute left-4 top-0 bottom-2 w-px bg-surface-container-highest pointer-events-none"></div>
+<!-- Sub-node: Electron GPU -->
+<div class="tree-row grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center hover:bg-surface-container-high transition-colors">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<span class="w-4 h-4 flex items-center justify-center text-outline mr-1">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+</span>
+<span class="material-symbols-outlined text-secondary text-[14px] mr-1">developer_board</span>
+<span class="text-on-surface-variant truncate">code.exe</span>
+<span class="ml-1 text-outline text-[10px]">GPU / Electron</span>
+</div>
+<div class="col-span-2 text-right text-outline">18442</div>
+<div class="col-span-1 text-right text-on-surface-variant">2.4%</div>
+<div class="col-span-2 text-right text-on-surface">320.0 MB</div>
+<div class="col-span-2 text-right text-outline">412</div>
+</div>
+<!-- Sub-node: Extension Host (Parent to LSP) -->
+<div class="tree-row flex flex-col hover:bg-surface-container-high transition-colors" data-node="extension-host">
+<div class="grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center cursor-pointer">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<button class="node-toggle w-4 h-4 flex items-center justify-center text-primary mr-1" data-target="children-ext-host">
+<span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<span class="material-symbols-outlined text-secondary text-[14px] mr-1">extension</span>
+<span class="font-medium text-on-surface truncate">code.exe</span>
+<span class="ml-1 text-secondary text-[10px]">Extension Host</span>
+</div>
+<div class="col-span-2 text-right text-outline">19104</div>
+<div class="col-span-1 text-right text-primary">6.8%</div>
+<div class="col-span-2 text-right text-on-surface">410.5 MB</div>
+<div class="col-span-2 text-right text-outline">789</div>
+</div>
+<!-- Extension Host's Descendants -->
+<div class="flex flex-col pl-6 relative" id="children-ext-host">
+<div class="absolute left-4 top-0 bottom-2 w-px bg-surface-container-highest pointer-events-none"></div>
+<!-- Target Focus Node: rust-analyzer.exe -->
+<div class="tree-row grid grid-cols-12 gap-space-xs px-space-sm py-1.5 items-center bg-surface-container-high rounded-l shadow-sm relative overflow-hidden" data-node="rust-analyzer">
+<!-- Active Accent Marker -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="col-span-5 flex items-center min-w-0 pl-1">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<span class="w-4 h-4 flex items-center justify-center text-outline mr-1">•</span>
+<span class="material-symbols-outlined text-primary-container text-[15px] mr-1.5">memory</span>
+<span class="font-bold text-primary truncate">rust-analyzer.exe</span>
+</div>
+<div class="col-span-2 text-right text-primary font-semibold">22910</div>
+<div class="col-span-1 text-right text-primary-fixed-dim font-bold">8.4%</div>
+<div class="col-span-2 text-right font-semibold text-tertiary">1,240.2 MB</div>
+<div class="col-span-2 text-right flex items-center justify-end gap-1">
+<span class="px-1.5 py-0.2 rounded bg-tertiary-container text-on-tertiary-container font-label-sm text-[9px] font-bold">HIGH MEM</span>
+</div>
+</div>
+<!-- Node: esbuild.exe -->
+<div class="tree-row grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center hover:bg-surface-container-high transition-colors">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<span class="w-4 h-4 flex items-center justify-center text-outline mr-1">•</span>
+<span class="material-symbols-outlined text-outline text-[14px] mr-1">bolt</span>
+<span class="text-on-surface-variant truncate">esbuild.exe</span>
+</div>
+<div class="col-span-2 text-right text-outline">23012</div>
+<div class="col-span-1 text-right text-outline">0.0%</div>
+<div class="col-span-2 text-right text-on-surface-variant">42.1 MB</div>
+<div class="col-span-2 text-right text-outline">104</div>
+</div>
+</div>
+</div>
+<!-- Sub-node: Integrated Terminal -->
+<div class="tree-row grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center hover:bg-surface-container-high transition-colors">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<span class="w-4 h-4 flex items-center justify-center text-outline mr-1">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+</span>
+<span class="material-symbols-outlined text-secondary text-[14px] mr-1">terminal</span>
+<span class="text-on-surface-variant truncate">code.exe</span>
+<span class="ml-1 text-outline text-[10px]">powershell.exe</span>
+</div>
+<div class="col-span-2 text-right text-outline">20412</div>
+<div class="col-span-1 text-right text-outline">0.1%</div>
+<div class="col-span-2 text-right text-on-surface-variant">68.3 MB</div>
+<div class="col-span-2 text-right text-outline">340</div>
+</div>
+</div>
+</div>
+<!-- Branch Child 2: brave.exe (Browser Tree) -->
+<div class="tree-row group relative flex flex-col hover:bg-surface-container transition-colors" data-node="brave-parent">
+<div class="grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center cursor-pointer">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<button class="node-toggle w-4 h-4 flex items-center justify-center text-primary mr-1" data-target="children-brave">
+<span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<span class="material-symbols-outlined text-secondary text-[16px] mr-1.5">public</span>
+<span class="font-medium text-on-surface truncate">brave.exe</span>
+<span class="ml-1 text-on-surface-variant text-[10px]">Brave Browser</span>
+</div>
+<div class="col-span-2 text-right text-outline">9214 <span class="text-on-surface-variant/40">/ 8144</span></div>
+<div class="col-span-1 text-right text-secondary-fixed">6.4%</div>
+<div class="col-span-2 text-right text-on-surface">1,420.8 MB</div>
+<div class="col-span-2 text-right flex items-center justify-end gap-1">
+<span class="text-on-surface-variant">2,118</span>
+<span class="px-1 py-0.2 rounded bg-surface-container-high text-[9px] text-secondary">WEB</span>
+</div>
+</div>
+<!-- Brave Children -->
+<div class="flex flex-col pl-6 relative" id="children-brave">
+<div class="absolute left-4 top-0 bottom-2 w-px bg-surface-container-highest pointer-events-none"></div>
+<!-- Brave Utility -->
+<div class="tree-row grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center hover:bg-surface-container-high transition-colors">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<span class="w-4 h-4 flex items-center justify-center text-outline mr-1">•</span>
+<span class="material-symbols-outlined text-outline text-[14px] mr-1">lan</span>
+<span class="text-on-surface-variant truncate">brave.exe</span>
+<span class="ml-1 text-outline text-[10px]">Network Svc</span>
+</div>
+<div class="col-span-2 text-right text-outline">10142</div>
+<div class="col-span-1 text-right text-outline">1.1%</div>
+<div class="col-span-2 text-right text-on-surface-variant">180.2 MB</div>
+<div class="col-span-2 text-right text-outline">290</div>
+</div>
+<!-- Brave Renderer -->
+<div class="tree-row grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center hover:bg-surface-container-high transition-colors">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<span class="w-4 h-4 flex items-center justify-center text-outline mr-1">•</span>
+<span class="material-symbols-outlined text-outline text-[14px] mr-1">tab</span>
+<span class="text-on-surface-variant truncate">brave.exe</span>
+<span class="ml-1 text-secondary text-[10px]">Tab - GitHub</span>
+</div>
+<div class="col-span-2 text-right text-outline">10298</div>
+<div class="col-span-1 text-right text-primary">3.2%</div>
+<div class="col-span-2 text-right text-on-surface-variant">410.0 MB</div>
+<div class="col-span-2 text-right text-outline">512</div>
+</div>
+</div>
+</div>
+<!-- Branch Child 3: WindowsTerminal.exe -->
+<div class="tree-row grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center hover:bg-surface-container transition-colors">
+<div class="col-span-5 flex items-center min-w-0">
+<div class="w-3 h-px bg-surface-container-highest mr-1"></div>
+<span class="w-4 h-4 flex items-center justify-center text-outline mr-1">
+<span class="material-symbols-outlined text-[14px]">arrow_right</span>
+</span>
+<span class="material-symbols-outlined text-secondary text-[15px] mr-1.5">terminal</span>
+<span class="text-on-surface truncate">WindowsTerminal.exe</span>
+</div>
+<div class="col-span-2 text-right text-outline">11200</div>
+<div class="col-span-1 text-right text-outline">0.4%</div>
+<div class="col-span-2 text-right text-on-surface-variant">94.1 MB</div>
+<div class="col-span-2 text-right text-outline">618</div>
+</div>
+</div>
+</div>
+<!-- Root Node 2: services.exe -->
+<div class="tree-row group flex flex-col bg-surface-container-low hover:bg-surface-container transition-colors mt-0.5" data-node="services">
+<div class="grid grid-cols-12 gap-space-xs px-space-sm py-1 items-center cursor-pointer">
+<div class="col-span-5 flex items-center min-w-0">
+<button class="node-toggle w-4 h-4 flex items-center justify-center text-outline hover:text-primary mr-1" data-target="children-services">
+<span class="material-symbols-outlined text-[16px]">arrow_right</span>
+</button>
+<span class="material-symbols-outlined text-outline text-[16px] mr-1.5">settings_suggest</span>
+<span class="font-semibold text-on-surface truncate">services.exe</span>
+<span class="ml-1.5 text-on-surface-variant text-[10px] hidden sm:inline">(Service Control Manager)</span>
+</div>
+<div class="col-span-2 text-right text-outline">1012 <span class="text-on-surface-variant/40">/ 840</span></div>
+<div class="col-span-1 text-right text-outline">0.2%</div>
+<div class="col-span-2 text-right text-on-surface">38.4 MB</div>
+<div class="col-span-2 text-right flex items-center justify-end gap-1">
+<span class="text-on-surface-variant">3,120</span>
+<span class="px-1 py-0.2 rounded bg-surface-container text-[9px] text-outline">14 CHILD SVCS</span>
+</div>
+</div>
+<!-- Services children collapsed by default -->
+<div class="hidden flex-col pl-6 relative" id="children-services">
+<div class="p-2 text-on-surface-variant text-[11px]">svchost.exe (DcomLaunch), spoolsv.exe, TrustedInstaller.exe...</div>
+</div>
+</div>
+</div>
+<!-- Quick Context Bar Footer inside Grid -->
+<div class="flex items-center justify-between px-space-sm py-1 bg-surface-container-high text-on-surface-variant font-code-telemetry text-[11px] mt-auto">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Focusing PID 22910 in subtree [explorer &gt; code &gt; ext-host]</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span>Depth: 4</span>
+<span>•</span>
+<span>Inherited Security: Medium Integrity</span>
+</div>
+</div>
+</div>
+<!-- Right Pane: Process Hierarchy & Security Inspector Drawer -->
+<div class="col-span-12 xl:col-span-4 flex flex-col gap-space-sm">
+<!-- Target Summary Card -->
+<div class="bg-surface-container-low rounded-lg p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[24px]">memory</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight">rust-analyzer.exe</span>
+<span class="font-code-telemetry text-code-telemetry text-secondary">PID 22910 • Win32 Native</span>
+</div>
+</div>
+<span class="px-space-xs py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-code-telemetry font-bold text-[10px]">
+            ACTIVE TARGET
+          </span>
+</div>
+<!-- Telemetry Vital Quad -->
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs">
+<div class="flex flex-col bg-surface-container p-space-xs rounded">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">CPU Allocation</span>
+<div class="flex items-baseline justify-between mt-0.5">
+<span class="font-code-metric-lg text-code-metric-lg text-primary">8.4%</span>
+<span class="font-code-telemetry text-[10px] text-on-surface-variant">4 Cores active</span>
+</div>
+<!-- Mini Progress Bar -->
+<div class="w-full bg-surface-container-highest h-1 rounded overflow-hidden mt-1">
+<div class="bg-primary h-full w-[34%]"></div>
+</div>
+</div>
+<div class="flex flex-col bg-surface-container p-space-xs rounded">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Private Working Set</span>
+<div class="flex items-baseline justify-between mt-0.5">
+<span class="font-code-metric-lg text-code-metric-lg text-tertiary">1,240 MB</span>
+<span class="font-code-telemetry text-[10px] text-error font-semibold">+42 MB/m</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded overflow-hidden mt-1">
+<div class="bg-tertiary h-full w-[68%]"></div>
+</div>
+</div>
+</div>
+<!-- Parentage Breadcrumb -->
+<div class="flex flex-col gap-1 bg-surface-container-high p-space-xs rounded font-code-telemetry text-code-telemetry">
+<span class="text-[10px] text-outline uppercase font-semibold">Lineage Path</span>
+<div class="flex items-center gap-1 text-[11px] text-on-surface flex-wrap">
+<span class="text-on-surface-variant">explorer.exe (8144)</span>
+<span class="material-symbols-outlined text-[12px] text-outline">chevron_right</span>
+<span class="text-on-surface-variant">code.exe (14208)</span>
+<span class="material-symbols-outlined text-[12px] text-outline">chevron_right</span>
+<span class="text-secondary font-semibold">code.exe (19104)</span>
+<span class="material-symbols-outlined text-[12px] text-primary">chevron_right</span>
+<span class="text-primary font-bold">rust-analyzer.exe</span>
+</div>
+</div>
+<!-- CLI Invocation Parameters -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-semibold text-on-surface">CLI Command Line</span>
+<button class="text-primary hover:text-primary-fixed text-[11px] flex items-center gap-0.5" id="copy-cli">
+<span class="material-symbols-outlined text-[12px]">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded font-code-telemetry text-[11px] text-on-surface-variant break-all max-h-20 overflow-y-auto select-all">
+            C:\Users\admin\.rustup\toolchains\stable-x86_64-pc-windows-msvc\bin\rust-analyzer.exe --log-file "C:\Users\admin\AppData\Local\Temp\rust-analyzer.log" --profile release
+          </div>
+</div>
+<!-- Kernel Tokens & Handle Audit -->
+<div class="grid grid-cols-3 gap-space-xs text-center font-code-telemetry text-code-telemetry py-space-xs">
+<div class="bg-surface-container p-1.5 rounded flex flex-col">
+<span class="text-outline text-[10px]">HANDLES</span>
+<span class="text-on-surface font-semibold text-[13px] mt-0.5">1,214</span>
+<span class="text-[9px] text-on-surface-variant">12 Sockets</span>
+</div>
+<div class="bg-surface-container p-1.5 rounded flex flex-col">
+<span class="text-outline text-[10px]">ENV VARS</span>
+<span class="text-on-surface font-semibold text-[13px] mt-0.5">64</span>
+<span class="text-[9px] text-secondary">Inherited</span>
+</div>
+<div class="bg-surface-container p-1.5 rounded flex flex-col">
+<span class="text-outline text-[10px]">INTEGRITY</span>
+<span class="text-secondary font-semibold text-[13px] mt-0.5">Medium</span>
+<span class="text-[9px] text-on-surface-variant">AppContainer: No</span>
+</div>
+</div>
+<!-- Inline Visual Sparkline / Micro Histogram (Historical 30s Thread Pressure) -->
+<div class="flex flex-col gap-1 bg-surface-container p-space-xs rounded">
+<div class="flex items-center justify-between text-[11px] font-code-telemetry">
+<span class="text-on-surface-variant">30s Load Profile</span>
+<span class="text-primary">AVG: 7.9%</span>
+</div>
+<div class="h-10 w-full flex items-end">
+<!-- Inline SVG Area Graph -->
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 280 40">
+<defs>
+<lineargradient id="loadGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#00D2FF" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#00D2FF" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,35 Q20,32 40,28 T80,18 T120,25 T160,10 T200,16 T240,6 T280,14 L280,40 L0,40 Z" fill="url(#loadGrad)"></path>
+<path d="M0,35 Q20,32 40,28 T80,18 T120,25 T160,10 T200,16 T240,6 T280,14" fill="none" stroke="#00D2FF" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- Remediation & Action Controls (Safety-Guarded) -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="flex-1 flex items-center justify-center gap-space-xs bg-surface-container-high hover:bg-surface-container-highest px-space-sm py-2 rounded text-secondary font-label-md text-label-md transition-colors shadow-sm" id="btn-suspend">
+<span class="material-symbols-outlined text-[16px]">pause_circle</span>
+<span>Suspend Node</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-space-xs bg-surface-container-high hover:bg-surface-container-highest px-space-sm py-2 rounded text-on-surface font-label-md text-label-md transition-colors shadow-sm" id="btn-inspect-handles">
+<span class="material-symbols-outlined text-[16px]">find_in_page</span>
+<span>Inspect Handles</span>
+</button>
+</div>
+<!-- Destructive Actions -->
+<div class="flex items-center gap-space-xs">
+<button class="flex-1 flex items-center justify-center gap-space-xs bg-error-container hover:bg-on-error hover:text-on-error-container text-on-error-container px-space-sm py-2 rounded font-label-md text-label-md transition-colors shadow-sm" id="btn-kill-tree">
+<span class="material-symbols-outlined text-[16px]">delete_forever</span>
+<span>Kill Process Tree</span>
+</button>
+<button class="flex items-center justify-center bg-surface-container hover:bg-error-container text-error px-space-sm py-2 rounded font-label-md text-label-md transition-colors shadow-sm" id="btn-kill-node" title="Kill PID 22910 Only">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Ancestry Insights & Security Context -->
+<div class="bg-surface-container-low rounded-lg p-space-sm shadow-md flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">security</span>
+<span>Inherited Context &amp; Tokens</span>
+</span>
+<div class="space-y-1 text-on-surface-variant font-code-telemetry text-[11px]">
+<div class="flex justify-between py-0.5 bg-surface-container px-space-xs rounded">
+<span>Parent Process</span>
+<span class="text-on-surface">code.exe (PID 19104)</span>
+</div>
+<div class="flex justify-between py-0.5 bg-surface-container px-space-xs rounded">
+<span>Privileges</span>
+<span class="text-on-surface">SeChangeNotifyPrivilege [Enabled]</span>
+</div>
+<div class="flex justify-between py-0.5 bg-surface-container px-space-xs rounded">
+<span>Virtualization</span>
+<span class="text-outline">Disabled</span>
+</div>
+<div class="flex justify-between py-0.5 bg-surface-container px-space-xs rounded">
+<span>DEP / ASLR</span>
+<span class="text-primary">Enforced / High Entropy</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Modal: Termination Safety Guard (Hidden by default) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-surface-dim/80 backdrop-blur-sm p-4" id="kill-modal">
+<div class="w-full max-w-md bg-surface-container-low rounded-lg p-space-lg shadow-xl flex flex-col gap-space-md relative overflow-hidden">
+<!-- Destructive Top Stripe -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-error"></div>
+<div class="flex items-start gap-space-sm pt-space-xs">
+<div class="w-10 h-10 rounded bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Terminate Process Subtree?</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            You are requesting termination of <strong class="text-on-surface">rust-analyzer.exe (PID 22910)</strong> and all related child threads.
+          </span>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded font-code-telemetry text-code-telemetry text-on-surface-variant space-y-1">
+<div class="flex justify-between">
+<span>Target PID:</span>
+<span class="text-primary font-bold">22910</span>
+</div>
+<div class="flex justify-between">
+<span>Unsaved Cargo state:</span>
+<span class="text-error">Will be dropped</span>
+</div>
+<div class="flex justify-between">
+<span>Parent impact:</span>
+<span>VSCode LSP will restart</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-xs pt-space-xs">
+<button class="px-space-md py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" id="modal-cancel">
+          Cancel (Esc)
+        </button>
+<button class="px-space-md py-1.5 rounded bg-error hover:bg-error-container text-on-error hover:text-on-error-container font-label-md text-label-md font-semibold transition-colors shadow-sm" id="modal-confirm">
+          Terminate Subtree (Enter)
+        </button>
+</div>
+</div>
+</div>
+<!-- Inline Logic for Tree Interaction, Filtering & Modal Flow -->
+<script>
+    (function initTreeInspector() {
+      // Node Collapse / Expand Toggles
+      const toggleButtons = document.querySelectorAll('.node-toggle');
+      toggleButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetId = btn.getAttribute('data-target');
+          const targetEl = document.getElementById(targetId);
+          const icon = btn.querySelector('.material-symbols-outlined');
+          if (targetEl) {
+            const isHidden = targetEl.classList.contains('hidden');
+            if (isHidden) {
+              targetEl.classList.remove('hidden');
+              icon.textContent = 'arrow_drop_down';
+            } else {
+              targetEl.classList.add('hidden');
+              icon.textContent = 'arrow_right';
+            }
+          }
+        });
+      });
+
+      // Expand All Button
+      const btnExpandAll = document.getElementById('btn-expand-all');
+      btnExpandAll?.addEventListener('click', () => {
+        document.querySelectorAll('#process-tree-list [id^="children-"]').forEach(el => {
+          el.classList.remove('hidden');
+        });
+        document.querySelectorAll('.node-toggle .material-symbols-outlined').forEach(icon => {
+          icon.textContent = 'arrow_drop_down';
+        });
+      });
+
+      // Collapse All Button
+      const btnCollapseAll = document.getElementById('btn-collapse-all');
+      btnCollapseAll?.addEventListener('click', () => {
+        document.querySelectorAll('#process-tree-list [id^="children-"]').forEach(el => {
+          el.classList.add('hidden');
+        });
+        document.querySelectorAll('.node-toggle .material-symbols-outlined').forEach(icon => {
+          icon.textContent = 'arrow_right';
+        });
+      });
+
+      // Live Filter Search Highlighting
+      const searchInput = document.getElementById('tree-search');
+      searchInput?.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const rows = document.querySelectorAll('.tree-row');
+        rows.forEach(row => {
+          if (!query) {
+            row.classList.remove('opacity-30', 'bg-primary/10');
+            return;
+          }
+          const text = row.textContent.toLowerCase();
+          if (text.includes(query)) {
+            row.classList.remove('opacity-30');
+            row.classList.add('bg-primary/10');
+          } else {
+            row.classList.remove('bg-primary/10');
+            row.classList.add('opacity-30');
+          }
+        });
+      });
+
+      // Kill Modal Handlers
+      const killModal = document.getElementById('kill-modal');
+      const btnKillTree = document.getElementById('btn-kill-tree');
+      const btnKillNode = document.getElementById('btn-kill-node');
+      const modalCancel = document.getElementById('modal-cancel');
+      const modalConfirm = document.getElementById('modal-confirm');
+
+      function openModal() {
+        killModal?.classList.remove('hidden');
+      }
+      function closeModal() {
+        killModal?.classList.add('hidden');
+      }
+
+      btnKillTree?.addEventListener('click', openModal);
+      btnKillNode?.addEventListener('click', openModal);
+      modalCancel?.addEventListener('click', closeModal);
+      
+      modalConfirm?.addEventListener('click', () => {
+        // Visual feedback
+        const targetNode = document.querySelector('[data-node="rust-analyzer"]');
+        if (targetNode) {
+          targetNode.classList.add('opacity-40', 'line-through');
+        }
+        closeModal();
+      });
+
+      // Keyboard navigation for dialog
+      window.addEventListener('keydown', (e) => {
+        if (!killModal?.classList.contains('hidden')) {
+          if (e.key === 'Escape') closeModal();
+          if (e.key === 'Enter') {
+            modalConfirm?.click();
+          }
+        }
+      });
+
+      // Copy CLI button feedback
+      const copyBtn = document.getElementById('copy-cli');
+      copyBtn?.addEventListener('click', () => {
+        const span = copyBtn.querySelector('span:last-child');
+        if (span) {
+          const prev = span.textContent;
+          span.textContent = 'Copied!';
+          setTimeout(() => span.textContent = prev, 1200);
+        }
+      });
+    })();
+  </script>
+</div></main></div><footer class="fixed bottom-0 left-0 right-0 z-50 h-7 bg-surface-container-lowest flex items-center justify-between px-space-md font-code-telemetry text-code-telemetry text-on-surface-variant"><div class="flex items-center gap-space-md"><span>Processes: <strong class="text-on-surface font-semibold">184</strong></span><span>Threads: <strong class="text-on-surface font-semibold">2,419</strong></span><span>Handles: <strong class="text-on-surface font-semibold">94,821</strong></span><span>Up Time: <strong class="text-on-surface font-semibold">04:18:22</strong></span><span>Kernel Memory: <strong class="text-on-surface font-semibold">682 MB</strong></span><span>Pagefile: <strong class="text-on-surface font-semibold">18.2 / 36.0 GB</strong></span></div><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span><span>Status: <strong class="text-on-surface font-semibold">Normal</strong></span></div></footer></body></html>
