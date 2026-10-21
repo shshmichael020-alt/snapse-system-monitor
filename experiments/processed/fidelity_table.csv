@@ -1,0 +1,11 @@
+Workload,Mode,MAE_CPU,RMSE_CPU,Pearson_r
+Churn_Bursts,Fixed_250ms,0.00,0.00,1.000
+Churn_Bursts,Fixed_500ms,34.08,35.81,0.000
+Churn_Bursts,Fixed_1000ms,27.52,29.37,0.000
+Churn_Bursts,Fixed_2000ms,12.88,14.81,0.000
+Churn_Bursts,Adaptive_VAC,19.65,21.41,0.000
+Idle_Baseline,Fixed_250ms,0.00,0.00,1.000
+Idle_Baseline,Fixed_500ms,28.04,29.82,0.000
+Idle_Baseline,Fixed_1000ms,48.78,51.21,0.000
+Idle_Baseline,Fixed_2000ms,14.99,16.60,0.000
+Idle_Baseline,Adaptive_VAC,22.47,23.72,0.000

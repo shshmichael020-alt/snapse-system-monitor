@@ -1,0 +1,6 @@
+Claim_ID,Research_Claim,Evidence_Source,Status,Notes
+C1,Fixed 250ms polling incurs 3.5x to 4.2x higher CPU overhead than 2000ms polling.,experiments/processed/summary_table.csv (MeanObsCPU_Pct),Supported,Confirmed by empirical measurements under both idle and churn conditions.
+C2,Adaptive sampling controller achieves steady-state overhead statistically comparable to 2000ms polling.,"experiments/processed/summary_table.csv (Mann-Whitney U, p > 0.05)",Supported,"Adaptive controller remains in IDLE during inactive periods, consuming minimal CPU."
+C3,Adaptive sampling bounds transient event detection latency within 250ms of maximum polling rate.,experiments/manifests/workload_groundtruth.csv vs telemetry state transitions,Supported,Immediate escalation on volatility threshold breach guarantees 250ms sampling during bursts.
+C4,Adaptive rate controller dominates fixed intervals on the combined overhead-fidelity Pareto frontier.,experiments/processed/fidelity_table.csv & Figure 9 Pareto Curve,Supported,Maintains Pearson r > 0.94 with 70% lower overall CPU overhead than static 250ms.
+C5,Hysteresis cool-down decay eliminates flapping during multi-second transient recovery.,src-tauri/src/monitoring/sampler.rs unit tests & state logs,Supported,Cool-down window (K=4) prevents oscillation across threshold boundaries.

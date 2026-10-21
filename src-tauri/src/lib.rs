@@ -38,7 +38,13 @@ pub fn run() {
             commands::acknowledge_alert,
             commands::get_settings,
             commands::save_settings,
-            commands::export_snapshot
+            commands::export_snapshot,
+            commands::configure_research_sampling,
+            commands::start_research_recording,
+            commands::stop_research_recording,
+            commands::get_research_telemetry,
+            commands::step_research_sample,
+            commands::export_research_telemetry_csv
         ])
         .run(tauri::generate_context!())
         .expect("error while running Snapse Tauri application");

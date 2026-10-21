@@ -1,0 +1,11 @@
+RunID,Mode,Repetition,Workload,DurationSec,SamplesCount,MeanActualIntervalMs,MeanJitterMs,MeanObserverCpuPct,MeanObserverMemMB,MeanCollectionUs,TelemetryFile
+Fixed_250ms_Idle_Baseline_1,Fixed_250ms,1,Idle_Baseline,10,36,271.17,35.06,19.90,17.93,28489.31,D:\OS\Snapse\experiments\raw\telemetry_Fixed_250ms_rep1_1792590319169.csv
+Fixed_500ms_Idle_Baseline_1,Fixed_500ms,1,Idle_Baseline,10,19,499.87,52.50,14.07,16.80,27263.74,D:\OS\Snapse\experiments\raw\telemetry_Fixed_500ms_rep1_1792590331550.csv
+Fixed_1000ms_Idle_Baseline_1,Fixed_1000ms,1,Idle_Baseline,10,10,926.34,126.33,13.64,17.34,28791.80,D:\OS\Snapse\experiments\raw\telemetry_Fixed_1000ms_rep1_1792590344183.csv
+Fixed_2000ms_Idle_Baseline_1,Fixed_2000ms,1,Idle_Baseline,10,5,1616.53,416.52,23.70,16.72,19846.40,D:\OS\Snapse\experiments\raw\telemetry_Fixed_2000ms_rep1_1792590356596.csv
+Adaptive_VAC_Idle_Baseline_1,Adaptive_VAC,1,Idle_Baseline,10,15,562.26,153.84,18.45,17.23,30263.33,D:\OS\Snapse\experiments\raw\telemetry_Adaptive_VAC_rep1_1792590369358.csv
+Fixed_250ms_Churn_Bursts_1,Fixed_250ms,1,Churn_Bursts,10,36,271.45,35.34,17.75,17.56,29062.75,D:\OS\Snapse\experiments\raw\telemetry_Fixed_250ms_rep1_1792590382343.csv
+Fixed_500ms_Churn_Bursts_1,Fixed_500ms,1,Churn_Bursts,10,19,506.32,58.95,14.37,17.44,32131.16,D:\OS\Snapse\experiments\raw\telemetry_Fixed_500ms_rep1_1792590395267.csv
+Fixed_1000ms_Churn_Bursts_1,Fixed_1000ms,1,Churn_Bursts,10,10,925.28,125.28,13.33,17.81,28278.90,D:\OS\Snapse\experiments\raw\telemetry_Fixed_1000ms_rep1_1792590408109.csv
+Fixed_2000ms_Churn_Bursts_1,Fixed_2000ms,1,Churn_Bursts,10,5,1617.11,417.11,1.69,17.69,23268.80,D:\OS\Snapse\experiments\raw\telemetry_Fixed_2000ms_rep1_1792590420661.csv
+Adaptive_VAC_Churn_Bursts_1,Adaptive_VAC,1,Churn_Bursts,10,12,749.59,179.56,41.35,17.33,22924.33,D:\OS\Snapse\experiments\raw\telemetry_Adaptive_VAC_rep1_1792590434136.csv

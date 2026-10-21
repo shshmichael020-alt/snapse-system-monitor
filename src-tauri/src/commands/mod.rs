@@ -220,3 +220,73 @@ pub fn export_snapshot(engine: State<'_, SharedEngine>, format: String) -> Resul
         String::from_utf8(inner).map_err(|e| e.to_string())
     }
 }
+
+#[tauri::command]
+pub fn configure_research_sampling(
+    engine: State<'_, SharedEngine>,
+    mode: String,
+    config: Option<crate::monitoring::ControllerConfig>,
+) -> Result<String, String> {
+    let sampling_mode = match mode.to_lowercase().as_str() {
+        "fixed250" | "fixed_250ms" => crate::monitoring::SamplingMode::Fixed250,
+        "fixed500" | "fixed_500ms" => crate::monitoring::SamplingMode::Fixed500,
+        "fixed1000" | "fixed_1000ms" => crate::monitoring::SamplingMode::Fixed1000,
+        "fixed2000" | "fixed_2000ms" => crate::monitoring::SamplingMode::Fixed2000,
+        "adaptive" | "adaptive_vac" => crate::monitoring::SamplingMode::Adaptive,
+        other => return Err(format!("Unknown sampling mode: {}", other)),
+    };
+    let mut eng = engine.write();
+    eng.configure_research(sampling_mode, config);
+    Ok(format!("Sampling mode set to {:?}", sampling_mode))
+}
+
+#[tauri::command]
+pub fn start_research_recording(engine: State<'_, SharedEngine>) -> Result<(), String> {
+    let mut eng = engine.write();
+    eng.start_research();
+    Ok(())
+}
+
+#[tauri::command]
+pub fn stop_research_recording(
+    engine: State<'_, SharedEngine>,
+) -> Result<Vec<crate::monitoring::ResearchTelemetryRecord>, String> {
+    let mut eng = engine.write();
+    Ok(eng.stop_research())
+}
+
+#[tauri::command]
+pub fn get_research_telemetry(
+    engine: State<'_, SharedEngine>,
+) -> Vec<crate::monitoring::ResearchTelemetryRecord> {
+    let eng = engine.read();
+    eng.get_research_records()
+}
+
+#[tauri::command]
+pub fn step_research_sample(
+    engine: State<'_, SharedEngine>,
+) -> crate::monitoring::ResearchTelemetryRecord {
+    let mut eng = engine.write();
+    eng.step_research()
+}
+
+#[tauri::command]
+pub fn export_research_telemetry_csv(
+    engine: State<'_, SharedEngine>,
+    file_path: String,
+) -> Result<usize, String> {
+    let eng = engine.read();
+    let records = eng.get_research_records();
+    let path = std::path::Path::new(&file_path);
+    if let Some(parent) = path.parent() {
+        std::fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+    }
+
+    let mut wtr = csv::Writer::from_path(path).map_err(|e| e.to_string())?;
+    for rec in &records {
+        wtr.serialize(rec).map_err(|e| e.to_string())?;
+    }
+    wtr.flush().map_err(|e| e.to_string())?;
+    Ok(records.len())
+}

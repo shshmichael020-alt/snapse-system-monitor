@@ -6,6 +6,9 @@ use sysinfo::{
     ProcessesToUpdate, RefreshKind, System,
 };
 
+use crate::monitoring::sampler::{
+    ControllerConfig, ResearchTelemetryRecord, SamplingMode, VolatilityController,
+};
 use crate::alerts::AlertEvaluator;
 use crate::history::HistoryManager;
 use crate::models::{
@@ -27,6 +30,12 @@ pub struct MonitoringEngine {
     snapse_pid: u32,
     last_refresh_time: Instant,
     last_snapshot: Option<SystemSnapshot>,
+    sampling_mode: SamplingMode,
+    volatility_controller: VolatilityController,
+    research_records: Vec<ResearchTelemetryRecord>,
+    is_research_active: bool,
+    last_sample_instant: Instant,
+    target_interval_ms: u64,
 }
 
 pub type SharedEngine = Arc<RwLock<MonitoringEngine>>;
@@ -55,6 +64,12 @@ impl MonitoringEngine {
             snapse_pid,
             last_refresh_time: Instant::now(),
             last_snapshot: None,
+            sampling_mode: SamplingMode::Adaptive,
+            volatility_controller: VolatilityController::new(ControllerConfig::default()),
+            research_records: Vec::with_capacity(5000),
+            is_research_active: false,
+            last_sample_instant: Instant::now(),
+            target_interval_ms: 1000,
         }
     }
 
@@ -482,5 +497,93 @@ impl MonitoringEngine {
 
     pub fn save_settings(&mut self, new_settings: crate::models::AppSettings) -> Result<(), String> {
         self.settings.save(new_settings)
+    }
+
+    pub fn configure_research(&mut self, mode: SamplingMode, config: Option<ControllerConfig>) {
+        self.sampling_mode = mode;
+        if let Some(cfg) = config {
+            self.volatility_controller = VolatilityController::new(cfg);
+        } else {
+            self.volatility_controller.reset();
+        }
+        self.target_interval_ms = mode.target_interval_ms();
+    }
+
+    pub fn start_research(&mut self) {
+        self.research_records.clear();
+        self.is_research_active = true;
+        self.last_sample_instant = Instant::now();
+    }
+
+    pub fn stop_research(&mut self) -> Vec<ResearchTelemetryRecord> {
+        self.is_research_active = false;
+        self.research_records.clone()
+    }
+
+    pub fn get_research_records(&self) -> Vec<ResearchTelemetryRecord> {
+        self.research_records.clone()
+    }
+
+    pub fn step_research(&mut self) -> ResearchTelemetryRecord {
+        let step_start = Instant::now();
+        let actual_interval_ms = (step_start - self.last_sample_instant).as_secs_f64() * 1000.0;
+        self.last_sample_instant = step_start;
+
+        let snapshot = self.refresh_all();
+        let collection_duration_us = step_start.elapsed().as_micros() as u64;
+
+        let mut obs_cpu = 0.0f32;
+        let mut obs_mem = 0u64;
+        if let Some(p) = self.system.process(Pid::from_u32(self.snapse_pid)) {
+            obs_cpu = p.cpu_usage();
+            obs_mem = p.memory();
+        }
+
+        let sys_cpu = snapshot.cpu.total_usage_percent;
+        let sys_mem_pct = snapshot.memory.used_percent;
+        let proc_count = self.system.processes().len() as u32;
+
+        let (state_str, target_interval, inst_v, smooth_v) = match self.sampling_mode {
+            SamplingMode::Fixed250 => ("FIXED_250".to_string(), 250, 0.0, 0.0),
+            SamplingMode::Fixed500 => ("FIXED_500".to_string(), 500, 0.0, 0.0),
+            SamplingMode::Fixed1000 => ("FIXED_1000".to_string(), 1000, 0.0, 0.0),
+            SamplingMode::Fixed2000 => ("FIXED_2000".to_string(), 2000, 0.0, 0.0),
+            SamplingMode::Adaptive => {
+                let (st, target_ms, iv, sv) = self.volatility_controller.step(sys_cpu, sys_mem_pct, proc_count);
+                (st.as_str().to_string(), target_ms, iv, sv)
+            }
+        };
+
+        self.target_interval_ms = target_interval;
+        let jitter_ms = (actual_interval_ms - target_interval as f64).abs();
+
+        let rec = ResearchTelemetryRecord {
+            timestamp_ms: snapshot.timestamp_ms,
+            mode: match self.sampling_mode {
+                SamplingMode::Fixed250 => "Fixed_250ms".to_string(),
+                SamplingMode::Fixed500 => "Fixed_500ms".to_string(),
+                SamplingMode::Fixed1000 => "Fixed_1000ms".to_string(),
+                SamplingMode::Fixed2000 => "Fixed_2000ms".to_string(),
+                SamplingMode::Adaptive => "Adaptive_VAC".to_string(),
+            },
+            target_interval_ms: target_interval,
+            actual_interval_ms,
+            jitter_ms,
+            collection_duration_us,
+            observer_cpu_percent: obs_cpu,
+            observer_memory_bytes: obs_mem,
+            state: state_str,
+            volatility_score: inst_v,
+            smoothed_volatility: smooth_v,
+            system_cpu_percent: sys_cpu,
+            system_memory_percent: sys_mem_pct,
+            process_count: proc_count,
+        };
+
+        if self.is_research_active {
+            self.research_records.push(rec.clone());
+        }
+
+        rec
     }
 }
