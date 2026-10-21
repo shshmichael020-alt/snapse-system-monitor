@@ -16,6 +16,8 @@ pub struct CpuSnapshot {
     pub physical_cores: usize,
     pub logical_cores: usize,
     pub base_frequency_mhz: u64,
+    pub virtualization_enabled: bool,
+    pub virtualization_type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -46,6 +48,8 @@ pub struct DiskVolumeInfo {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StorageSnapshot {
     pub volumes: Vec<DiskVolumeInfo>,
+    pub physical_disk_model: String,
+    pub physical_disk_size_bytes: u64,
     pub read_bytes_sec: u64,
     pub write_bytes_sec: u64,
 }
@@ -53,6 +57,9 @@ pub struct StorageSnapshot {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NetworkInterfaceSnapshot {
     pub name: String,
+    pub display_name: String,
+    pub adapter_type: String,
+    pub is_connected: bool,
     pub rx_bytes_sec: u64,
     pub tx_bytes_sec: u64,
     pub total_rx_bytes: u64,
@@ -64,6 +71,18 @@ pub struct NetworkSnapshot {
     pub interfaces: Vec<NetworkInterfaceSnapshot>,
     pub total_rx_bytes_sec: u64,
     pub total_tx_bytes_sec: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GpuSnapshot {
+    pub name: String,
+    pub vendor_name: String,
+    pub driver_version: String,
+    pub dedicated_memory_bytes: u64,
+    pub shared_memory_bytes: u64,
+    pub utilization_percent: f32,
+    pub temperature_celsius: Option<f32>,
+    pub power_watts: Option<f32>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -87,6 +106,7 @@ pub struct SystemSnapshot {
     pub memory: MemorySnapshot,
     pub storage: StorageSnapshot,
     pub network: NetworkSnapshot,
+    pub gpu: Option<GpuSnapshot>,
     pub system: HostSystemInfo,
 }
 
@@ -100,4 +120,5 @@ pub struct SystemHistoryPoint {
     pub disk_write_bytes_sec: u64,
     pub net_rx_bytes_sec: u64,
     pub net_tx_bytes_sec: u64,
+    pub gpu_utilization: Option<f32>,
 }

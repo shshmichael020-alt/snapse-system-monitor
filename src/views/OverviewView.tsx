@@ -96,6 +96,16 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
   const maxNet = Math.max(...netData, 5);
   const netSpark = generateSparkline(netData.slice(-15), 200, 48, maxNet);
 
+  // Active network adapter selection
+  const activeNetwork = useMemo(() => {
+    if (!snapshot || !snapshot.network.interfaces.length) return null;
+    return (
+      snapshot.network.interfaces.find((i) => i.is_connected) ||
+      snapshot.network.interfaces.find((i) => i.rx_bytes_sec > 0 || i.tx_bytes_sec > 0) ||
+      snapshot.network.interfaces[0]
+    );
+  }, [snapshot]);
+
   // Dual timeline chart generator (600x180)
   const generateDualTimelinePaths = () => {
     if (!cpuData.length) {
@@ -342,16 +352,16 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
 
           <div className="flex flex-col gap-0.5 font-code-telemetry text-code-telemetry text-on-surface-variant bg-surface-container-lowest/60 p-space-xs rounded">
             <span className="truncate font-semibold text-on-surface">
-              {snapshot ? snapshot.cpu.brand : 'AMD Ryzen 9 7950X'}
+              {snapshot ? snapshot.cpu.brand : 'Processor'}
             </span>
             <div className="flex justify-between text-outline">
               <span>
                 {snapshot
                   ? `${snapshot.cpu.physical_cores} Cores • ${snapshot.cpu.logical_cores} Threads`
-                  : '16 Cores • 32 Threads'}
+                  : 'Multi-Core Processor'}
               </span>
               <span className="text-primary font-semibold">
-                Base: {snapshot ? `${(snapshot.cpu.base_frequency_mhz / 1000).toFixed(2)} GHz` : '4.50 GHz'}
+                Base: {snapshot ? `${(snapshot.cpu.base_frequency_mhz / 1000).toFixed(2)} GHz` : '1.30 GHz'}
               </span>
             </div>
           </div>
@@ -503,13 +513,13 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               </span>
             </div>
             <div className="flex justify-between text-outline">
-              <span className="truncate max-w-[130px]">
-                {snapshot && snapshot.storage.volumes[0] ? snapshot.storage.volumes[0].name || 'NVMe OS' : 'Samsung 990 PRO'}
+              <span className="truncate max-w-[150px]">
+                {snapshot ? snapshot.storage.physical_disk_model || 'NVMe SSD' : 'NVMe Solid State Drive'}
               </span>
               <span className="text-on-surface">
-                {snapshot && snapshot.storage.volumes[0]
-                  ? `${formatBytes(snapshot.storage.volumes[0].available_bytes)} Free`
-                  : '1.18 TB Free'}
+                {snapshot && snapshot.storage.volumes.length > 0
+                  ? `${formatBytes(snapshot.storage.volumes.reduce((acc, v) => acc + v.available_bytes, 0))} Free`
+                  : 'Storage Ready'}
               </span>
             </div>
           </div>
@@ -521,23 +531,29 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
           <div className="flex items-start justify-between">
             <div className="flex flex-col">
               <div className="flex items-center gap-space-xs">
-                <span className="material-symbols-outlined text-primary-container text-[18px]">lan</span>
+                <span className="material-symbols-outlined text-primary-container text-[18px]">
+                  {activeNetwork?.adapter_type === 'Wi-Fi' ? 'wifi' : 'lan'}
+                </span>
                 <span className="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant font-semibold">
-                  Ethernet 2.5G
+                  {activeNetwork ? `${activeNetwork.adapter_type} (${activeNetwork.name})` : 'Network'}
                 </span>
               </div>
               <span className="font-code-metric-lg text-headline-lg text-on-surface tracking-tight mt-space-xs tabular-nums">
                 {snapshot
                   ? `${((snapshot.network.total_rx_bytes_sec + snapshot.network.total_tx_bytes_sec) * 8 / 1000 / 1000).toFixed(1)} `
-                  : '14.8 '}
+                  : '0.0 '}
                 <span className="text-label-md text-primary font-normal">Mbps</span>
               </span>
             </div>
             <div className="flex flex-col items-end">
-              <span className="px-space-xs py-0.5 rounded bg-surface-container-high text-primary-container font-code-telemetry text-label-sm font-semibold">
-                2,500 F/D
+              <span className={`px-space-xs py-0.5 rounded font-code-telemetry text-label-sm font-semibold ${
+                activeNetwork?.is_connected ? 'bg-primary-container/20 text-primary-container' : 'bg-surface-container-high text-outline'
+              }`}>
+                {activeNetwork ? (activeNetwork.is_connected ? 'Connected' : 'Offline') : 'Ready'}
               </span>
-              <span className="font-code-telemetry text-label-sm text-outline mt-1">IPv4 Assigned</span>
+              <span className="font-code-telemetry text-label-sm text-outline mt-1">
+                {activeNetwork ? activeNetwork.adapter_type : 'Windows IP'}
+              </span>
             </div>
           </div>
 
@@ -572,21 +588,23 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               <span>
                 ↓ Rx:{' '}
                 <strong className="text-on-surface">
-                  {snapshot ? formatThroughput(snapshot.network.total_rx_bytes_sec) : '14.8 Mbps'}
+                  {snapshot ? formatThroughput(snapshot.network.total_rx_bytes_sec) : '0 B/s'}
                 </strong>
               </span>
               <span>
                 ↑ Tx:{' '}
                 <strong className="text-on-surface">
-                  {snapshot ? formatThroughput(snapshot.network.total_tx_bytes_sec) : '420 Kbps'}
+                  {snapshot ? formatThroughput(snapshot.network.total_tx_bytes_sec) : '0 B/s'}
                 </strong>
               </span>
             </div>
             <div className="flex justify-between text-outline">
-              <span className="truncate max-w-[130px]">
-                {snapshot && snapshot.network.interfaces[0] ? snapshot.network.interfaces[0].name : 'Intel I225-V PCIe'}
+              <span className="truncate max-w-[150px]">
+                {activeNetwork ? activeNetwork.display_name : 'Realtek 8821CE Wireless'}
               </span>
-              <span className="text-primary-container font-semibold">192.168.1.145</span>
+              <span className={activeNetwork?.is_connected ? 'text-primary-container font-semibold' : 'text-outline'}>
+                {activeNetwork?.is_connected ? 'Connected' : 'Disconnected'}
+              </span>
             </div>
           </div>
         </div>

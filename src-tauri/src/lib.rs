@@ -12,6 +12,7 @@ pub mod tests;
 use std::sync::Arc;
 use parking_lot::RwLock;
 use monitoring::MonitoringEngine;
+use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -20,6 +21,14 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .manage(engine)
+        .setup(|app| {
+            if let Some(icon) = app.default_window_icon() {
+                for (_label, window) in app.webview_windows() {
+                    let _ = window.set_icon(icon.clone());
+                }
+            }
+            Ok(())
+        })
         .invoke_handler(tauri::generate_handler![
             commands::get_system_snapshot,
             commands::get_processes,

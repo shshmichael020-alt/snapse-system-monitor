@@ -115,6 +115,7 @@ impl MonitoringEngine {
         }
 
         let physical_cores = self.system.physical_core_count().unwrap_or(logical_cores);
+        let (virtualization_enabled, virtualization_type) = PlatformOps::get_cpu_virtualization_info(&vendor_id);
 
         let cpu_snapshot = CpuSnapshot {
             total_usage_percent: total_cpu_usage,
@@ -124,6 +125,8 @@ impl MonitoringEngine {
             physical_cores,
             logical_cores,
             base_frequency_mhz: max_freq,
+            virtualization_enabled,
+            virtualization_type,
         };
 
         // 2. Memory Snapshot
@@ -193,16 +196,38 @@ impl MonitoringEngine {
         let disk_read_bytes_sec = (total_disk_read as f64 / elapsed_secs) as u64;
         let disk_write_bytes_sec = (total_disk_write as f64 / elapsed_secs) as u64;
 
+        let detected_volumes_total = volumes.iter().map(|v| v.total_bytes).sum::<u64>();
+        let (physical_disk_model, physical_disk_size_bytes) = PlatformOps::get_physical_disk_info(detected_volumes_total);
+
         let storage_snapshot = StorageSnapshot {
             volumes,
+            physical_disk_model,
+            physical_disk_size_bytes,
             read_bytes_sec: disk_read_bytes_sec,
             write_bytes_sec: disk_write_bytes_sec,
         };
 
         // 4. Network Snapshot
+        let adapter_map = PlatformOps::get_network_adapter_map();
         let mut interfaces = Vec::new();
         let mut total_rx_rate: u64 = 0;
         let mut total_tx_rate: u64 = 0;
+
+        let is_virtual_or_subinterface = |name: &str, desc: &str| -> bool {
+            let n = name.to_lowercase();
+            let d = desc.to_lowercase();
+            n.contains("filter")
+                || n.contains("packet scheduler")
+                || n.contains("wfp")
+                || n.contains("kernel debugger")
+                || n.contains("wan miniport")
+                || n.contains("local area connection*")
+                || d.contains("filter")
+                || d.contains("packet scheduler")
+                || d.contains("lightweight")
+                || d.contains("miniport")
+                || (d.contains("virtual adapter") && !n.contains("wi-fi"))
+        };
 
         for (name, net) in self.networks.iter() {
             let rx = (net.received() as f64 / elapsed_secs) as u64;
@@ -210,13 +235,55 @@ impl MonitoringEngine {
             total_rx_rate = total_rx_rate.saturating_add(rx);
             total_tx_rate = total_tx_rate.saturating_add(tx);
 
+            let (display_name, adapter_type, is_connected) = if let Some((desc, atype, conn)) = adapter_map.get(name) {
+                (desc.clone(), atype.clone(), *conn)
+            } else {
+                let atype = if name.to_lowercase().contains("wi-fi") {
+                    "Wi-Fi".to_string()
+                } else if name.to_lowercase().contains("ethernet") {
+                    "Ethernet".to_string()
+                } else {
+                    "Other".to_string()
+                };
+                let conn = rx > 0 || tx > 0 || net.total_received() > 0;
+                (name.clone(), atype, conn)
+            };
+
+            if is_virtual_or_subinterface(name, &display_name) {
+                continue;
+            }
+
             interfaces.push(NetworkInterfaceSnapshot {
                 name: name.clone(),
+                display_name,
+                adapter_type,
+                is_connected,
                 rx_bytes_sec: rx,
                 tx_bytes_sec: tx,
                 total_rx_bytes: net.total_received(),
                 total_tx_bytes: net.total_transmitted(),
             });
+        }
+
+        // Add known physical adapters that sysinfo didn't enumerate if any
+        for (friendly_name, (desc, atype, is_connected)) in &adapter_map {
+            if is_virtual_or_subinterface(friendly_name, desc) {
+                continue;
+            }
+            if !interfaces.iter().any(|i| &i.name == friendly_name) {
+                if atype == "Wi-Fi" || atype == "Ethernet" {
+                    interfaces.push(NetworkInterfaceSnapshot {
+                        name: friendly_name.clone(),
+                        display_name: desc.clone(),
+                        adapter_type: atype.clone(),
+                        is_connected: *is_connected,
+                        rx_bytes_sec: 0,
+                        tx_bytes_sec: 0,
+                        total_rx_bytes: 0,
+                        total_tx_bytes: 0,
+                    });
+                }
+            }
         }
 
         let network_snapshot = NetworkSnapshot {
@@ -243,12 +310,15 @@ impl MonitoringEngine {
             is_admin: PlatformOps::is_current_process_elevated(),
         };
 
+        let gpu_snapshot = PlatformOps::get_gpu_info();
+
         let snapshot = SystemSnapshot {
             timestamp_ms,
             cpu: cpu_snapshot,
             memory: memory_snapshot,
             storage: storage_snapshot,
             network: network_snapshot,
+            gpu: gpu_snapshot,
             system: system_info,
         };
 
@@ -262,6 +332,7 @@ impl MonitoringEngine {
             disk_write_bytes_sec,
             net_rx_bytes_sec: total_rx_rate,
             net_tx_bytes_sec: total_tx_rate,
+            gpu_utilization: None,
         });
 
         // Evaluate alerts against current settings

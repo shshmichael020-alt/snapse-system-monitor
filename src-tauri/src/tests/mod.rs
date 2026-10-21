@@ -34,6 +34,7 @@ mod tests {
                 disk_write_bytes_sec: 0,
                 net_rx_bytes_sec: 0,
                 net_tx_bytes_sec: 0,
+                gpu_utilization: None,
             });
         }
 
@@ -43,6 +44,8 @@ mod tests {
         assert_eq!(retrieved.first().unwrap().cpu_usage, 50.0);
         assert_eq!(retrieved.last().unwrap().cpu_usage, 90.0);
     }
+
+
 
     #[test]
     fn test_process_history_cleanup() {

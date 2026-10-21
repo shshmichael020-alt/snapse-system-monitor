@@ -28,9 +28,11 @@ export const TitleBar: React.FC<TitleBarProps> = ({
     >
       {/* Brand & App Title */}
       <div className="flex items-center gap-space-sm pointer-events-none">
-        <div className="w-5 h-5 rounded bg-primary-container/20 border border-primary-container/40 flex items-center justify-center">
-          <span className="material-symbols-outlined text-primary-container text-[14px]">speed</span>
-        </div>
+        <img
+          src="/snapse-logo.png"
+          alt="Snapse"
+          className="w-5 h-5 rounded-sm object-contain drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]"
+        />
         <span className="font-label-md text-label-md text-on-surface tracking-tight font-semibold">
           Snapse — Task Manager {isAdmin ? '(Administrator)' : ''}
         </span>

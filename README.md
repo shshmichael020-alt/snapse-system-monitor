@@ -107,3 +107,15 @@ This generates the standalone executable and installer bundles in `src-tauri/tar
 
 - Standard monitoring operates under standard user privileges. Certain protected Windows kernel processes may deny handle opening unless Snapse is explicitly launched as Administrator.
 - Hardware temperature sensors require manufacturer-specific WMI or ring-0 drivers; fallback values are noted when ACPI thermal zones are restricted by Windows.
+
+---
+
+## 8. Preserved Frontend Design Source & Research Suite
+
+- **UI Design Assets**: Preserved design reference exports and screens are stored in [frontend-design-source/](file:///D:/OS/Snapse/frontend-design-source/).
+- **Research Evaluation & Reproduction**:
+  - Research protocol: [research/experimental_protocol.md](file:///D:/OS/Snapse/research/experimental_protocol.md)
+  - Literature review & related work: [research/literature_review.md](file:///D:/OS/Snapse/research/literature_review.md)
+  - Reproduction guide: [experiments/REPRODUCE.md](file:///D:/OS/Snapse/experiments/REPRODUCE.md)
+  - Telemetry schema: [experiments/DATA_DICTIONARY.md](file:///D:/OS/Snapse/experiments/DATA_DICTIONARY.md)
+  - Scholarly paper draft: [paper/manuscript.md](file:///D:/OS/Snapse/paper/manuscript.md)

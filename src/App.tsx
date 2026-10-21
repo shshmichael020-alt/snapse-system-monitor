@@ -285,7 +285,7 @@ export const App: React.FC = () => {
         </main>
       </div>
 
-      {/* Fixed Persistent Bottom Status Bar from Stitch */}
+      {/* Fixed Persistent Bottom Status Bar from Desktop Interface Reference */}
       <StatusBar snapshot={snapshot} processes={processes} />
     </div>
   );

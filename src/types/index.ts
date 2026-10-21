@@ -12,6 +12,8 @@ export interface CpuSnapshot {
   physical_cores: number;
   logical_cores: number;
   base_frequency_mhz: number;
+  virtualization_enabled: boolean;
+  virtualization_type: string;
 }
 
 export interface MemorySnapshot {
@@ -39,12 +41,17 @@ export interface DiskVolumeInfo {
 
 export interface StorageSnapshot {
   volumes: DiskVolumeInfo[];
+  physical_disk_model: string;
+  physical_disk_size_bytes: number;
   read_bytes_sec: number;
   write_bytes_sec: number;
 }
 
 export interface NetworkInterfaceSnapshot {
   name: string;
+  display_name: string;
+  adapter_type: string;
+  is_connected: boolean;
   rx_bytes_sec: number;
   tx_bytes_sec: number;
   total_rx_bytes: number;
@@ -55,6 +62,17 @@ export interface NetworkSnapshot {
   interfaces: NetworkInterfaceSnapshot[];
   total_rx_bytes_sec: number;
   total_tx_bytes_sec: number;
+}
+
+export interface GpuSnapshot {
+  name: string;
+  vendor_name: string;
+  driver_version: string;
+  dedicated_memory_bytes: number;
+  shared_memory_bytes: number;
+  utilization_percent: number;
+  temperature_celsius?: number | null;
+  power_watts?: number | null;
 }
 
 export interface HostSystemInfo {
@@ -76,6 +94,7 @@ export interface SystemSnapshot {
   memory: MemorySnapshot;
   storage: StorageSnapshot;
   network: NetworkSnapshot;
+  gpu?: GpuSnapshot | null;
   system: HostSystemInfo;
 }
 
@@ -134,6 +153,7 @@ export interface SystemHistoryPoint {
   disk_write_bytes_sec: number;
   net_rx_bytes_sec: number;
   net_tx_bytes_sec: number;
+  gpu_utilization?: number | null;
 }
 
 export type AlertSeverity = 'Info' | 'Warning' | 'Critical';

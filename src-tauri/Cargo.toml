@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Snapse - Windows Desktop Task Manager and System Monitor"
 authors = ["Snapse Team"]
 edition = "2021"
+default-run = "snapse"
 
 [lib]
 name = "snapse_lib"
@@ -33,6 +34,11 @@ features = [
     "Win32_System_Diagnostics_ToolHelp",
     "Win32_UI_WindowsAndMessaging",
     "Win32_Security",
+    "Win32_Graphics_Dxgi",
+    "Win32_NetworkManagement_IpHelper",
+    "Win32_NetworkManagement_Ndis",
+    "Win32_Networking_WinSock",
+    "Win32_System_Registry",
 ]
 
 [profile.release]

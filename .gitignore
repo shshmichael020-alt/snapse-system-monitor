@@ -4,3 +4,5 @@ src-tauri/target/
 target/
 *.log
 experiments/raw/*.tmp
+release/*.exe
+test_install/
