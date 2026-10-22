@@ -20,7 +20,7 @@
   - High-DPI application icons across all Windows taskbar, start menu, and installer contexts.
   - 3D system topology visualization and adaptive telemetry ring buffers.
 - **Engineered Installer & Dependency Isolation**:
-  - Bundled Nullsoft (NSIS) 64-bit installer with embedded `WebView2Loader.dll` ensuring zero missing-DLL failures across all Windows 10/11 environments.
+  - Bundled Nullsoft (NSIS) 64-bit installer with embedded `WebView2Loader.dll` and `libunwind.dll` ensuring zero missing-DLL failures across all Windows 10/11 environments.
 
 ---
 
@@ -28,7 +28,7 @@
 
 | Asset | Target Architecture | Size | SHA-256 Checksum |
 | :--- | :--- | :--- | :--- |
-| **`Snapse-Setup-v1.0.0-x64.exe`** | Windows 10/11 (x86_64) | ~2.57 MiB | `286324A773C0A15FD08984F4C1E5BF7D13A30A9BA8C5A6C7F11F4A04ABCFC7E8` |
+| **`Snapse-Setup-v1.0.0-x64.exe`** | Windows 10/11 (x86_64) | ~2.62 MiB | `0A16077C9E8D08265EEAF2CEC16C3F5871BF459831D90C446ADB2E5AE24336A9` |
 
 ### Installation Instructions
 1. Download `Snapse-Setup-v1.0.0-x64.exe`.

@@ -33,5 +33,22 @@ fn main() {
         }
     }
 
+    // Ensure libunwind.dll is copied to the target output directory for NSIS packaging
+    if let Ok(out_dir) = std::env::var("OUT_DIR") {
+        let out_path = PathBuf::from(out_dir);
+        // OUT_DIR is target/.../build/snapse-.../out, so ancestor(3) is the release/debug dir
+        if let Some(target_dir) = out_path.ancestors().nth(3) {
+            let root_unwind = manifest_dir.join("..").join("libunwind.dll");
+            if root_unwind.exists() {
+                let _ = std::fs::copy(&root_unwind, target_dir.join("libunwind.dll"));
+                let _ = std::fs::copy(&root_unwind, manifest_dir.join("nsis").join("libunwind.dll"));
+            }
+            let root_webview = manifest_dir.join("..").join("WebView2Loader.dll");
+            if root_webview.exists() {
+                let _ = std::fs::copy(&root_webview, target_dir.join("WebView2Loader.dll"));
+            }
+        }
+    }
+
     tauri_build::build();
 }
